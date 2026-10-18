@@ -18,14 +18,19 @@ Al implementar cada sección, añadir su id real y sustituir el elemento pendien
 
 ## Interacción
 
-Desde 70rem la navegación es horizontal. Bajo ese ancho, el botón abre una lista en el flujo de la página. No es un diálogo modal: Tab recorre los enlaces y controles sin atrapar el foco. Al abrir se enfoca hero.tsx; Escape y el botón de cierre devuelven el foco al disparador. Salir de la cabecera cierra el menú; activar hero.tsx enfoca main. El cambio a escritorio restablece el estado del menú. Las opciones pendientes son texto con aria-disabled, no controles muertos en el orden de tabulación.
+El menú hamburguesa con Lucide Menu/X es el acceso principal en todos los tamaños. El disparador solo contiene el icono y tiene aria-label localizado. El desplegable es no modal: Tab recorre el enlace y los controles sin atrapar el foco. Al abrir se enfoca hero.tsx; Escape y el botón de cierre devuelven el foco al disparador. Salir de la cabecera o pulsar fuera cierra el menú; activar hero.tsx cierra y enfoca main. Las opciones pendientes son texto con aria-disabled, sin href ni tabulación. Workspace y Terminal tienen iconos Lucide y estado Pendiente/Pending.
 
+La cabecera usa sticky con top: 0, z-index 30, crema #F6F5F0 al 96% y separador fino. El desplegable se superpone sin desplazar el Hero y admite scroll interno en pantallas bajas. La navegación por anclas reserva la altura de la cabecera; el enlace de salto queda por encima de ella.
 Marca, controles y enlace activo tienen objetivos de al menos 44px. El menú no añade animaciones; se conserva la regla global de reduced motion.
 
-## Validación
+## Validación actual
 
-- npm run check: typecheck, lint, 7 pruebas y build correctos.
-- Pruebas nuevas: destinos pendientes sin href, destino existente, indicador actual y traducción del menú.
-- Navegador Chrome: 320, 390, 768, 1119 y 1440px; apertura por Enter, Escape, foco, enlace al contenido, ES/EN, sin desbordamientos ni errores JavaScript; reduced motion activado durante las comprobaciones funcionales.
-- Capturas revisadas de escritorio y móvil, menú cerrado/abierto e inglés.
+- `npm run check`: typecheck, lint, 9 pruebas y build correctos.
+- Pruebas: nombre accesible sin texto visible, destinos pendientes sin href, destino real, indicador activo y traducción; suite previa del Hero y mensajes intacta.
+- Navegador: 1440×800, 390×844 y 320×640; sin desbordamiento horizontal, disparador 44×44.
+- Scroll real: cabecera en top=0 a scrollY=150 en escritorio y scrollY=230 en móvil.
+- Enter abre y enfoca hero.tsx; Escape cierra y devuelve el foco; seleccionar cierra y enfoca main sin ocultarlo bajo la cabecera. Tab permite salir sin trampa y cierra al abandonar la cabecera.
+- ES inicial y EN alternativo comprobados. Regla global de reduced motion conservada, sin cambios en Hero.
+- Compilación de producción servida localmente: sin errores ni avisos de consola. Los errores transitorios de recarga en caliente durante la edición no se reproducen en producción.
 - Detector de diseño: sin hallazgos.
+- Capturas entregadas fuera del repositorio: escritorio, móvil, inglés y sticky.

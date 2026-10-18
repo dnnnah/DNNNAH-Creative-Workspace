@@ -103,3 +103,34 @@ p { line-height: 1.65; max-width: 70ch; }
  .phrase { grid-area: auto; visibility: visible; opacity: 1; font-size: clamp(1.25rem, 2.5vw, 2rem); }
  .phrase-progress, .rotation-toggle { display: none; }
 }
+
+/* Navbar: etiquetas de archivo, destinos habilitados de forma progresiva. */
+.masthead { flex-wrap: nowrap; gap: 1.25rem; }
+.masthead .wordmark { text-decoration: none; font-size: 1.125rem; min-height: 44px; flex-shrink: 0; }
+.masthead .brand-mark { width: 36px; border-radius: 9px; font-size: 1.375rem; }
+.primary-navigation { margin-inline-start: auto; }
+.primary-navigation ul { display: flex; align-items: center; gap: .25rem; list-style: none; margin: 0; padding: 0; }
+.file-link { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: .125rem; min-height: 44px; padding: .375rem .625rem; font-family: var(--font-mono); font-size: .75rem; text-decoration: none; }
+.file-link[aria-current] { background: var(--color-lime); border-radius: 4px; }
+.file-link[href]:hover { background: var(--color-lavender); }
+.file-link--pending { color: #57564f; cursor: default; }
+.pending-status { font-family: var(--font-sans); font-size: .625rem; }
+.masthead .language { padding-left: .875rem; border-left: 1px solid #aaa99f; gap: .125rem; }
+.masthead .language button { font-family: var(--font-mono); font-size: .75rem; border-radius: 4px; }
+.menu-toggle { display: none; }
+@media (max-width: 69.999rem) {
+ .masthead { display: grid; grid-template-columns: 1fr auto auto; gap: .5rem; }
+ .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; min-width: 44px; padding: .5rem .625rem; border: 1px solid var(--color-ink); border-radius: 4px; background: transparent; font-size: .75rem; }
+ .menu-toggle[aria-expanded='true'] { background: var(--color-lavender); }
+ .primary-navigation { display: none; grid-column: 1 / -1; grid-row: 2; margin: .75rem 0 0; }
+ .primary-navigation.is-open { display: block; }
+ .primary-navigation ul { flex-direction: column; align-items: stretch; gap: .25rem; }
+ .file-link { flex-direction: row; justify-content: space-between; gap: 1rem; padding: .75rem; font-size: .875rem; }
+ .pending-status { font-size: .75rem; }
+ .masthead .language { padding-left: .5rem; }
+}
+@media (max-width: 25rem) {
+ .menu-toggle span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+ .masthead .wordmark { font-size: 1rem; gap: .375rem; }
+ .masthead .language { border-left: 0; padding-left: 0; }
+}

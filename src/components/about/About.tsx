@@ -1,4 +1,4 @@
-import { ArrowUpRight, Asterisk, CircleHelp, RotateCcw } from 'lucide-react'
+import { ArrowUpRight, FileText, Asterisk, CircleHelp, RotateCcw } from 'lucide-react'
 import type { Locale } from '../../i18n/messages'
 import { aboutCopy } from './content'
 import { Journey } from './Journey'
@@ -7,7 +7,7 @@ import './about.css'
 export function About({ locale }: { locale: Locale }) {
   const t = aboutCopy[locale]
   return <section id="about" className="about" aria-labelledby="about-title" tabIndex={-1}>
-    <div className="about-filebar"><span>about.md</span><span>{locale === 'es' ? 'Persona detrás del proceso' : 'Person behind the process'}<ArrowUpRight size={16} aria-hidden="true" /></span></div>
+    <div className="about-filebar"><span><FileText size={18} aria-hidden="true" />about.md</span><span>{locale === 'es' ? 'Persona detrás del proceso' : 'Person behind the process'}<ArrowUpRight size={16} aria-hidden="true" /></span></div>
     <div className="about-opening editorial-grid">
       <h2 id="about-title">{locale === 'es' ? <>Más que<br />solo <span>código.</span></> : <>More than<br />just <span>code.</span></>}</h2>
       <figure className="about-portrait" aria-label={t.portrait}>

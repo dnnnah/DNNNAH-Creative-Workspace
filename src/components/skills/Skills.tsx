@@ -17,7 +17,7 @@ export function Skills({ locale }: { locale: Locale }) {
   const visible = technologies.filter(tool => category === 'all' || tool.category === category)
   const tool = visible.find(item => item.name === selected) ?? visible[0]
   return <section id="skills" className="skills" aria-labelledby="skills-title" tabIndex={-1}>
-    <div className="skills-filebar"><span><Braces size={16} aria-hidden="true" />skills.ts</span><span>{es ? 'El criterio antes que la herramienta' : 'Judgment before the tool'}</span></div>
+    <div className="skills-filebar"><span><Braces size={18} aria-hidden="true" />skills.ts</span><span>{es ? 'El criterio antes que la herramienta' : 'Judgment before the tool'}</span></div>
     <div className="skills-opening editorial-grid">
       <h2 id="skills-title">{es ? 'Las herramientas ayudan.' : 'Tools are good.'}<br /><span>{es ? 'Pensar es mejor.' : 'Thinking is better.'}</span></h2>
       <div className="skills-aside"><ArrowDownRight size={48} strokeWidth={1} aria-hidden="true" /><p>{es ? 'Una caja de herramientas, muchas formas de resolver. Selecciona una pieza para ver cómo encaja.' : 'One toolkit, many ways to solve. Select a piece to see how it fits.'}</p></div>

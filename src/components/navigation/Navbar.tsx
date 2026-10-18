@@ -20,7 +20,7 @@ export function Navbar({ locale, onLocaleChange }: { locale: Locale; onLocaleCha
   const close = () => { setOpen(false); toggle.current?.focus() }
 
   useEffect(() => {
-    const sync = () => setActive(location.hash.startsWith('#projects') ? 'projects' : location.hash === '#skills' ? 'skills' : location.hash === '#about' ? 'about' : 'main')
+    const sync = () => setActive(location.hash.startsWith('#projects') ? 'projects' : location.hash === '#skills' ? 'skills' : location.hash === '#about' ? 'about' : location.hash === '#contact' ? 'contact' : 'main')
     sync()
     addEventListener('hashchange', sync)
     return () => removeEventListener('hashchange', sync)
@@ -52,13 +52,13 @@ export function Navbar({ locale, onLocaleChange }: { locale: Locale; onLocaleCha
       {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
     </button>
     <nav id="primary-navigation" className={`primary-navigation${open ? ' is-open' : ''}`} aria-label={es ? 'Navegación principal' : 'Main navigation'}>
-      <ul>{destinations.map(({ label, icon: Icon }, index) => <li key={label}>{index < 4
-        ? <a ref={index === 0 ? firstLink : undefined} className="file-link" href={index === 0 ? '#main' : index === 1 ? '#about' : index === 2 ? '#skills' : '#projects'} aria-current={active === (index === 0 ? 'main' : index === 1 ? 'about' : index === 2 ? 'skills' : 'projects') ? 'page' : undefined} onClick={() => {
+      <ul>{destinations.map(({ label, icon: Icon }, index) => <li key={label}>{index < 5
+        ? <a ref={index === 0 ? firstLink : undefined} className="file-link" href={index === 0 ? '#main' : index === 1 ? '#about' : index === 2 ? '#skills' : index === 3 ? '#projects' : '#contact'} aria-current={active === (index === 0 ? 'main' : index === 1 ? 'about' : index === 2 ? 'skills' : index === 3 ? 'projects' : 'contact') ? 'page' : undefined} onClick={() => {
           setOpen(false)
-          const target = index === 0 ? 'main' : index === 1 ? 'about' : index === 2 ? 'skills' : 'projects'
+          const target = index === 0 ? 'main' : index === 1 ? 'about' : index === 2 ? 'skills' : index === 3 ? 'projects' : 'contact'
           setActive(target)
           document.getElementById(target)?.focus({ preventScroll: true })
-        }}><Icon size={18} aria-hidden="true" /><span>{label}</span>{active === (index === 0 ? 'main' : index === 1 ? 'about' : index === 2 ? 'skills' : 'projects') && <span className="active-dot" aria-hidden="true" />}</a>
+        }}><Icon size={18} aria-hidden="true" /><span>{label}</span>{active === (index === 0 ? 'main' : index === 1 ? 'about' : index === 2 ? 'skills' : index === 3 ? 'projects' : 'contact') && <span className="active-dot" aria-hidden="true" />}</a>
         : <span className="file-link file-link--pending" aria-disabled="true"><Icon size={18} aria-hidden="true" /><span>{label}</span><span className="pending-status">{es ? 'Próximamente' : 'Coming soon'}</span></span>
       }</li>)}</ul>
       <div className="workspace-tools">

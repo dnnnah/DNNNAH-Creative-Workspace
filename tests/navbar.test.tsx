@@ -8,16 +8,16 @@ test('ofrece los destinos existentes y señaliza los pendientes sin enlaces roto
   expect(html).toContain('href="#about"')
   expect(html).toContain('href="#skills"')
   expect(html).toContain('aria-current="page"')
-  expect(html.match(/aria-disabled="true"/g)).toHaveLength(3)
+  expect(html.match(/aria-disabled="true"/g)).toHaveLength(2)
   expect(html).toContain('href="#projects"')
-  for (const target of ['contact']) expect(html).not.toContain(`href="#${target}"`)
-  expect(html).toContain('Próximamente')
+  expect(html).toContain('href="#contact"')
+  expect(html).toContain('Pendiente')
 })
 
 test('traduce el menú y conserva las etiquetas de archivo en inglés', () => {
   const html = renderToStaticMarkup(<Navbar locale="en" onLocaleChange={() => {}} />)
   expect(html).toContain('Open menu')
-  expect(html).toContain('Coming soon')
+  expect(html).toContain('Pending')
   for (const label of ['hero.tsx', 'about.md', 'skills.ts', 'projects/', 'contact.tsx']) expect(html).toContain(label)
 })
 

@@ -148,3 +148,8 @@ html { scroll-padding-top: calc(var(--navbar-height) + 1rem); }
  .masthead .wordmark { font-size: 1rem; gap: .375rem; }
  .masthead .language { border-right: 0; padding-right: 0; gap: 0; }
 }
+
+/* Identificadores de archivo: mismos iconos de 18 px que la navegación. */
+.hero-filebar, .about-filebar > :first-child, .contact-index > :first-child { display: flex; align-items: center; gap: .75rem; }
+.hero-filebar { margin-bottom: 2rem; font: .75rem var(--font-mono); }
+.hero-filebar svg, .about-filebar > :first-child svg, .contact-index > :first-child svg { flex-shrink: 0; }

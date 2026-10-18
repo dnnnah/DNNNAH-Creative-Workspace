@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Contact } from '../components/contact/contact'
 import { Navbar } from '../components/navigation/Navbar'
 import { About } from '../components/about/About'
 import { Skills } from '../components/skills/Skills'
@@ -30,7 +31,7 @@ export function App() {
     <a className="skip-link" href="#main">{t.skip}</a>
     <div className="page">
       <Navbar locale={locale} onLocaleChange={setLocale} />
-      <main id="main" tabIndex={-1}>{project ? <ProjectCase project={project} locale={locale} /> : <><Hero key={locale} locale={locale} /><About locale={locale} /><Skills locale={locale} /><Projects locale={locale} /></>}</main>
+      <main id="main" tabIndex={-1}>{project ? <ProjectCase project={project} locale={locale} /> : <><Hero key={locale} locale={locale} /><About locale={locale} /><Skills locale={locale} /><Projects locale={locale} /><Contact locale={locale} /></>}</main>
     </div>
   </>
 }

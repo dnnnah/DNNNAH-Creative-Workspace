@@ -1,28 +1,26 @@
 export type Locale = 'es' | 'en'
-
 export function resolveLocale(value?: string): Locale {
   return value === 'en' ? 'en' : 'es'
 }
 
-const es = {
-  title: 'Verificación del sistema visual',
-  notice: 'Pantalla temporal de desarrollo. Solo comprueba los fundamentos de Editorial Playground; no es una sección del portafolio.',
-  skip: 'Saltar al contenido', language: 'Idioma', palette: 'Paleta', typography: 'Tipografía',
-  display: 'Títulos y jerarquía editorial.', body: 'Texto de lectura e interfaz.', columns: 'columnas',
-  controls: 'Botones y estados', test: 'Probar estado', reset: 'Restablecer', disabled: 'Deshabilitado',
-  confirmation: 'Estado activado correctamente.', instruction: 'Usa Tab para comprobar el foco y Enter para activar.',
-  grid: 'Grid de 12 columnas', gridNote: 'Estructura fluida con márgenes y separación adaptables.',
+type Messages = {
+  title: string; greeting: string; name: string; skip: string; language: string;
+  description: string; github: string; source: string; principle: string;
+  phrases: readonly string[];
 }
-
-type Messages = { [Key in keyof typeof es]: string }
-const en: Messages = {
-  title: 'Visual system verification',
-  notice: 'Temporary development screen. It only checks the foundations of Editorial Playground; this is not a portfolio section.',
-  skip: 'Skip to content', language: 'Language', palette: 'Palette', typography: 'Typography',
-  display: 'Headings and editorial hierarchy.', body: 'Reading and interface text.', columns: 'columns',
-  controls: 'Buttons and states', test: 'Test state', reset: 'Reset', disabled: 'Disabled',
-  confirmation: 'State activated successfully.', instruction: 'Use Tab to check focus and Enter to activate.',
-  grid: '12-column grid', gridNote: 'Fluid structure with adaptable margins and spacing.',
+export const messages: Record<Locale, Messages> = {
+  es: {
+    title: 'Donnovan — Creative Workspace', greeting: 'Hola, soy', name: 'Donnovan.',
+    skip: 'Saltar al contenido', language: 'Idioma',
+    description: 'Dirijo la arquitectura y coordino agentes de IA para convertir ideas en experiencias digitales. De la lógica al detalle, respondo por la calidad del resultado.',
+    github: 'Explorar mi GitHub', source: 'Ver más', principle: 'Intención en cada decisión.',
+    phrases: ['Diseño la lógica.', 'Dirijo la creación.', 'Respondo por el resultado.', 'Creo experiencias digitales con intención.'],
+  },
+  en: {
+    title: 'Donnovan — Creative Workspace', greeting: "Hi, I'm", name: 'Donnovan.',
+    skip: 'Skip to content', language: 'Language',
+    description: 'I direct the architecture and coordinate AI agents to turn ideas into digital experiences. From the logic to the details, I own the quality of the result.',
+    github: 'Explore my GitHub', source: 'See more', principle: 'Intention in every decision.',
+    phrases: ['I design the logic.', 'I direct the build.', 'I own the result.', 'Building digital experiences with intention.'],
+  },
 }
-
-export const messages: Record<Locale, Messages> = { es, en }

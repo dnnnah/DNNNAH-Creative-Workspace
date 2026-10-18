@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-cream: #F6F5F0;
+  --color-ink: #171717;
+  --color-lime: #B8FF65;
+  --color-lavender: #D9CDFF;
+  --font-display: 'Space Grotesk Variable', sans-serif;
+  --font-sans: 'Inter Variable', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', monospace;
+  --spacing: 0.25rem;
+  --text-display: clamp(2.5rem, 7vw, 5rem);
+  --text-heading: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+:root {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --page-gutter: clamp(1.25rem, 5vw, 5rem);
+  --grid-gap: clamp(0.5rem, 2vw, 1.5rem);
+  --content-width: 90rem;
+  --duration-fast: 150ms;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+button, select { font: inherit; }
+button { cursor: pointer; }
+::selection { background: var(--color-lavender); color: var(--color-ink); }
+:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 4px; }
+a { color: inherit; text-underline-offset: 0.25em; }
+.skip-link { position: absolute; left: var(--page-gutter); top: -5rem; padding: 1rem; background: var(--color-lime); z-index: 1; }
+.skip-link:focus { top: 1rem; }
+.page { max-width: var(--content-width); margin-inline: auto; padding: var(--space-lg) var(--page-gutter) var(--space-xl); }
+.editorial-grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--grid-gap); }
+.masthead { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-bottom: var(--space-md); border-bottom: 1px solid; flex-wrap: wrap; }
+.wordmark { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.03em; }
+.language { display: flex; gap: 0.5rem; align-items: center; }
+.language button { border: 1px solid transparent; background: transparent; min-width: 44px; min-height: 44px; }
+.language button[aria-pressed='true'] { border-color: var(--color-ink); background: var(--color-lavender); }
+h1, h2, p { margin: 0; }
+h1, h2 { font-family: var(--font-display); font-weight: 500; letter-spacing: -0.03em; text-wrap: balance; }
+h1 { font-size: var(--text-display); line-height: 1.05; max-width: 16ch; }
+h2 { font-size: var(--text-heading); line-height: 1.2; }
+p { line-height: 1.65; max-width: 70ch; }
+.introduction { padding-block: var(--space-xl); }
+.introduction h1 { grid-column: span 8; }
+.introduction p { grid-column: span 4; align-self: end; }
+.specimen { padding-block: var(--space-lg); border-top: 1px solid; }
+.specimen h2 { grid-column: span 4; }
+.specimen-content { grid-column: span 8; display: grid; gap: var(--space-md); min-width: 0; }
+.palette { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.swatch { flex: 1 1 100px; margin: 0; }
+.swatch-color { height: 4rem; border: 1px solid var(--color-ink); background: var(--swatch); }
+.swatch figcaption { margin-top: var(--space-xs); font-family: var(--font-mono); font-size: 0.75rem; }
+.font-sample { font-size: 1.125rem; }
+.font-sample strong { display: block; font-size: 1.5rem; font-weight: 500; }
+.controls { display: flex; flex-wrap: wrap; gap: var(--space-sm); }
+.button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0.75rem 1.25rem; border: 1px solid var(--color-ink); background: var(--color-lime); color: var(--color-ink); font-weight: 600; transition: background-color var(--duration-fast) ease-out; }
+.button:hover:not(:disabled) { background: var(--color-lavender); }
+.button:active:not(:disabled) { background: var(--color-ink); color: var(--color-cream); }
+.button--secondary { background: transparent; }
+.button:disabled { opacity: 0.5; cursor: not-allowed; }
+.status { min-height: 1.65em; }
+.grid-sample { grid-column: 1 / -1; }
+.grid-sample span { display: grid; place-items: center; min-height: 3rem; background: var(--color-lavender); font-family: var(--font-mono); font-size: 0.75rem; }
+@media (max-width: 47.99rem) {
+  .introduction { row-gap: var(--space-lg); }
+  .introduction h1, .introduction p, .specimen h2, .specimen-content { grid-column: 1 / -1; }
+  .grid-sample { gap: 0.25rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Permite que los elementos editoriales cedan su ancho intrínseco en móvil. */
+.editorial-grid > * { min-inline-size: 0; }
+h1 { overflow-wrap: anywhere; }

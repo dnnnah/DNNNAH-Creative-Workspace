@@ -1,7 +1,7 @@
 import type { Locale } from '../../i18n/messages'
 
 type Copy = Record<Locale, string>
-export type Project = { slug: string; name: string; status: Copy; summary: Copy; context: Copy; approach: Copy; limits: Copy; tools: string[] }
+export type Project = { slug: string; name: string; status: Copy; summary: Copy; context: Copy; approach: Copy; limits: Copy; tools: string[]; demo?: string }
 export const projects: Project[] = [
   {
     slug: 'protech', name: 'Protech',
@@ -13,7 +13,7 @@ export const projects: Project[] = [
     tools: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Supabase', 'Python', 'Cloudinary'],
   },
   {
-    slug: 'pawpass', name: 'PawPass',
+    slug: 'pawpass', name: 'PawPass', demo: 'https://pet-carnet.vercel.app/',
     status: { es: 'Académico · Incompleto', en: 'Academic · Incomplete' },
     summary: { es: 'Una identidad para cada mascota.', en: 'An identity for every pet.' },
     context: { es: 'Proyecto académico en desarrollo sobre identidad digital para mascotas.', en: 'An academic project in development exploring digital identity for pets.' },
@@ -22,7 +22,7 @@ export const projects: Project[] = [
     tools: ['React', 'Tailwind', 'TypeScript'],
   },
   {
-    slug: 'nutria', name: 'NutrIA',
+    slug: 'nutria', name: 'NutrIA', demo: 'https://nutria-bay.vercel.app/',
     status: { es: 'Académico · Incompleto', en: 'Academic · Incomplete' },
     summary: { es: 'La nutrición como punto de partida.', en: 'Nutrition as a starting point.' },
     context: { es: 'Una PWA de nutrición, desarrollada como proyecto académico y todavía incompleta.', en: 'A nutrition PWA developed as an academic project, still incomplete.' },
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     tools: ['React', 'Tailwind', 'TypeScript'],
   },
   {
-    slug: 'dnnnah-runtime', name: 'DNNNAH Runtime',
+    slug: 'dnnnah-runtime', name: 'DNNNAH Runtime', demo: 'https://dnnnah-runtime.vercel.app/',
     status: { es: 'Portafolio anterior', en: 'Previous portfolio' },
     summary: { es: 'Otra forma de contar el código.', en: 'Another way to tell the code’s story.' },
     context: { es: 'Mi portafolio anterior, con una identidad visual inspirada en Go.', en: 'My previous portfolio, with a visual identity inspired by Go.' },

@@ -21,7 +21,7 @@ test('cada enlace de galería resuelve un caso bilingüe con retorno y sin enlac
       expect(html).toContain('id="case-title"')
       expect(html).toContain(locale === 'es' ? 'Estado y alcance' : 'Status and scope')
       expect(html).toContain(locale === 'es' ? 'No es una captura' : 'Not a screenshot')
-      expect(html).not.toContain('href="http')
+      if (slug === 'protech') expect(html).not.toContain('href="http')
     }
   }
   expect(projectFromHash('#projects/desconocido')).toBeUndefined()
@@ -34,4 +34,23 @@ test('las tarjetas muestran el stack y permiten leer el contexto sin abandonar l
   expect(html).toContain('Cloudinary</li>')
   expect(html).toContain('<summary>Sobre el proyecto</summary>')
   expect(html.match(/class="project-stack"/g)).toHaveLength(4)
+})
+
+test('publica únicamente las tres demos confirmadas tanto en tarjetas como en casos ES/EN', async () => {
+  const { Projects, ProjectCase } = await import('../src/components/projects/Projects')
+  const { projects } = await import('../src/components/projects/content')
+  const demos = ['https://pet-carnet.vercel.app/', 'https://nutria-bay.vercel.app/', 'https://dnnnah-runtime.vercel.app/']
+  for (const locale of ['es', 'en'] as const) {
+    const gallery = renderToStaticMarkup(<Projects locale={locale} />)
+    expect(gallery.match(/class="project-demo"/g)).toHaveLength(3)
+    for (const url of demos) expect(gallery).toContain(`href="${url}"`)
+    for (const project of projects) {
+      const html = renderToStaticMarkup(<ProjectCase project={project} locale={locale} />)
+      if (project.slug === 'protech') expect(html).not.toContain('class="project-demo"')
+      else {
+        expect(html).toContain(`href="${demos[['pawpass', 'nutria', 'dnnnah-runtime'].indexOf(project.slug)]}"`)
+        expect(html).toContain(locale === 'es' ? 'Ver demo' : 'View demo')
+      }
+    }
+  }
 })

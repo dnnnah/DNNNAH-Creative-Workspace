@@ -2,12 +2,13 @@ import { expect, test } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { Navbar } from '../src/components/navigation/Navbar'
 
-test('ofrece solo el destino existente y señaliza los pendientes sin enlaces rotos', () => {
+test('ofrece los destinos existentes y señaliza los pendientes sin enlaces rotos', () => {
   const html = renderToStaticMarkup(<Navbar locale="es" onLocaleChange={() => {}} />)
   expect(html).toContain('href="#main"')
+  expect(html).toContain('href="#about"')
   expect(html).toContain('aria-current="page"')
-  expect(html.match(/aria-disabled="true"/g)).toHaveLength(6)
-  for (const target of ['about', 'skills', 'projects', 'contact']) expect(html).not.toContain(`href="#${target}"`)
+  expect(html.match(/aria-disabled="true"/g)).toHaveLength(5)
+  for (const target of ['skills', 'projects', 'contact']) expect(html).not.toContain(`href="#${target}"`)
   expect(html).toContain('Próximamente')
 })
 

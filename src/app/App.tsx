@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Navbar } from '../components/navigation/Navbar'
+import { About } from '../components/about/About'
 import { Hero } from '../components/hero/Hero'
 import { messages, type Locale } from '../i18n/messages'
 
@@ -15,7 +16,7 @@ export function App() {
     <a className="skip-link" href="#main">{t.skip}</a>
     <div className="page">
       <Navbar locale={locale} onLocaleChange={setLocale} />
-      <main id="main" tabIndex={-1}><Hero key={locale} locale={locale} /></main>
+      <main id="main" tabIndex={-1}><Hero key={locale} locale={locale} /><About locale={locale} /></main>
     </div>
   </>
 }

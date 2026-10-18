@@ -10,7 +10,7 @@ const destinations = [
   { label: 'contact.tsx', icon: PanelTop },
 ] as const
 
-export function Navbar({ locale, onLocaleChange }: { locale: Locale; onLocaleChange: (locale: Locale) => void }) {
+export function Navbar({ locale, onLocaleChange, onWorkspaceOpen }: { locale: Locale; onLocaleChange: (locale: Locale) => void; onWorkspaceOpen?: () => void }) {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('main')
   const toggle = useRef<HTMLButtonElement>(null)
@@ -62,9 +62,12 @@ export function Navbar({ locale, onLocaleChange }: { locale: Locale; onLocaleCha
         : <span className="file-link file-link--pending" aria-disabled="true"><Icon size={18} aria-hidden="true" /><span>{label}</span><span className="pending-status">{es ? 'Próximamente' : 'Coming soon'}</span></span>
       }</li>)}</ul>
       <div className="workspace-tools">
-        {[{ label: 'Workspace', icon: PanelsTopLeft }, { label: 'Terminal', icon: Terminal }].map(({ label, icon: Icon }) =>
-          <span key={label} className="file-link file-link--pending" aria-disabled="true"><Icon size={18} aria-hidden="true" /><span>{label}</span><span className="pending-status">{es ? 'Pendiente' : 'Pending'}</span></span>
-        )}
+        <button className="file-link workspace-launch" type="button" aria-haspopup="dialog" onClick={() => {
+          setOpen(false)
+          toggle.current?.focus()
+          onWorkspaceOpen?.()
+        }}><PanelsTopLeft size={18} aria-hidden="true" /><span>Workspace</span></button>
+        <span className="file-link file-link--pending" aria-disabled="true"><Terminal size={18} aria-hidden="true" /><span>Terminal</span><span className="pending-status">{es ? 'Pendiente' : 'Pending'}</span></span>
       </div>
     </nav>
 

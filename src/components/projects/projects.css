@@ -74,3 +74,12 @@
  .identity-letter { font-size: 10rem; }
  .runtime-word { font-size: 2.5rem; }
 }
+
+.project-stack { display: flex; flex-wrap: wrap; gap: .375rem; padding: 0; margin: 1rem 0; list-style: none; }
+.project-stack li { border: 1px solid #aaa99f; padding: .25rem .5rem; font-size: .75rem; line-height: 1.5; overflow-wrap: anywhere; }
+.project-stack-pending { font-size: .75rem; margin-block: 1rem; }
+.project-overview { border-top: 1px solid #aaa99f; }
+.project-overview summary { display: list-item; min-height: 44px; padding-block: .75rem; cursor: pointer; font-size: .875rem; font-weight: 600; }
+.project-overview summary:hover, .project-overview summary:focus-visible { background: var(--color-lavender); }
+.project-overview p { font-size: .875rem; padding-block: .5rem; }
+.project-case-link { display: inline-flex; align-items: center; gap: .5rem; min-width: 44px; min-height: 44px; padding-block: .5rem; font-size: .875rem; }

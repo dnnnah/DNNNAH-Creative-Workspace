@@ -109,7 +109,7 @@ p { line-height: 1.65; max-width: 70ch; }
 /* Navbar: workspace compacto; solo destinos reales. */
 :root {
  --navbar-height: 69px;
- --navbar-inset: max(var(--page-gutter), calc((100vw - var(--content-width)) / 2 + var(--page-gutter)));
+ --navbar-inset: 1.25rem;
 }
 .page { padding-top: var(--navbar-inset); }
 html { scroll-padding-top: calc(var(--navbar-height) + 1rem); }

@@ -14,9 +14,9 @@ Se utilizan fragmentos para soportar enlaces directos y recargas en hosting est�
 
 ## Contenido y presentación
 
-Los casos solo incluyen información confirmada en el encargo. No se publican enlaces externos, métricas ni funciones sin verificar. Cada figura se identifica explícitamente como composición abstracta, no como captura. Las tecnologías de Protech se documentan como conjunto, sin asignarles funciones no confirmadas. El stack de los demás casos queda sin confirmar.
+Los casos solo incluyen información confirmada en el encargo. No se publican enlaces externos, métricas ni funciones sin verificar. Cada figura se identifica explícitamente como composición abstracta, no como captura. Las tecnologías de Protech se documentan como conjunto, sin asignarles funciones no confirmadas. La base React, Tailwind y TypeScript está confirmada por el usuario para los cuatro proyectos.
 
-Dos columnas asimétricas y escalonadas desde 353 px; una columna hasta 352 px para conservar legibilidad. Arte geométrico local, sin recursos externos ni nuevas dependencias. Los enlaces tienen área mínima de 44 px y foco visible; no se añade movimiento. La navbar sticky y el ajuste global de reduced motion se conservan.
+Dos columnas asimétricas y escalonadas desde 353 px; una columna hasta 352 px para conservar legibilidad. Arte geométrico local, sin recursos externos ni nuevas dependencias. Las tarjetas muestran el stack y un apartado nativo desplegable con contexto y acceso al caso. Los enlaces y desplegables tienen área mínima de 44 px y foco visible; no se añade movimiento. La navbar sticky y el ajuste global de reduced motion se conservan. El margen superior inicial del navbar es fijo de 20 px, independiente del ancho de pantalla.
 
 ## Verificación
 

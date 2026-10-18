@@ -23,6 +23,8 @@ export function Projects({ locale }: { locale: Locale }) {
     <div className="projects-masonry">{projects.map(project => <article className={`project-entry project-entry--${project.slug}`} key={project.slug}>
       <a className="project-link" href={`#projects/${project.slug}`} aria-label={`${es ? 'Ver caso' : 'View case study'}: ${project.name}`}><ProjectArt project={project} locale={locale} /><div className="project-heading"><h3>{project.name}</h3><ArrowUpRight size={24} aria-hidden="true" /></div></a>
       <p className="project-status">{project.status[locale]}</p><p className="project-summary">{project.summary[locale]}</p>
+      {project.tools.length ? <ul className="project-stack" aria-label={`${es ? 'Stack de' : 'Stack for'} ${project.name}`}>{project.tools.map(tool => <li key={tool}>{tool}</li>)}</ul> : <p className="project-stack-pending">{es ? 'Stack por confirmar' : 'Stack to be confirmed'}</p>}
+      <details className="project-overview"><summary>{es ? 'Sobre el proyecto' : 'About the project'}</summary><p>{project.context[locale]}</p><a className="project-case-link" href={`#projects/${project.slug}`}>{es ? 'Leer caso de estudio' : 'Read case study'}<ArrowUpRight size={16} aria-hidden="true" /></a></details>
     </article>)}</div>
     <p className="projects-end">{es ? 'El contexto también es parte del trabajo.' : 'Context is part of the work, too.'}</p>
   </section>

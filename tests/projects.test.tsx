@@ -27,3 +27,11 @@ test('cada enlace de galería resuelve un caso bilingüe con retorno y sin enlac
   expect(projectFromHash('#projects/desconocido')).toBeUndefined()
   expect(projectFromHash('#projects/protech-extra')).toBeUndefined()
 })
+
+test('las tarjetas muestran el stack y permiten leer el contexto sin abandonar la galería', () => {
+  const html = renderToStaticMarkup(<App />)
+  expect(html).toContain('aria-label="Stack de Protech"')
+  expect(html).toContain('Cloudinary</li>')
+  expect(html).toContain('<summary>Sobre el proyecto</summary>')
+  expect(html.match(/class="project-stack"/g)).toHaveLength(4)
+})

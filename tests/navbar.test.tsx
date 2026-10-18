@@ -8,7 +8,7 @@ test('ofrece los destinos existentes y señaliza los pendientes sin enlaces roto
   expect(html).toContain('href="#about"')
   expect(html).toContain('href="#skills"')
   expect(html).toContain('aria-current="page"')
-  expect(html.match(/aria-disabled="true"/g)).toHaveLength(2)
+  expect(html.match(/aria-disabled="true"/g)).toHaveLength(1)
   expect(html).toContain('href="#projects"')
   expect(html).toContain('href="#contact"')
   expect(html).toContain('Pendiente')
@@ -28,9 +28,9 @@ test('el disparador solo muestra un icono y conserva su nombre accesible', () =>
   expect(html).not.toContain('>Abrir menú<')
 })
 
-test('Workspace y Terminal son pendientes sin destinos ficticios', () => {
+test('Workspace ofrece un botón real y Terminal permanece pendiente', () => {
   const html = renderToStaticMarkup(<Navbar locale="es" onLocaleChange={() => {}} />)
-  expect(html).toContain('Workspace')
+  expect(html).toMatch(/<button[^>]*aria-haspopup="dialog"[^>]*>[\s\S]*?Workspace/)
   expect(html).toContain('Terminal')
   expect(html).not.toContain('href="#workspace"')
   expect(html).not.toContain('href="#terminal"')

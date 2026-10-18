@@ -7,6 +7,7 @@ import refresh from 'eslint-plugin-react-refresh'
 export default tseslint.config(
   { ignores: ['dist/**', 'node_modules/**', 'work/**', 'outputs/**'] },
   js.configs.recommended,
+  { files: ['tests/browser/*.mjs'], languageOptions: { globals: { ...globals.node, ...globals.browser } } },
   ...tseslint.configs.recommended,
   { files: ['**/*.{ts,tsx}'], languageOptions: { globals: globals.browser }, plugins: { 'react-hooks': hooks, 'react-refresh': refresh }, rules: { ...hooks.configs.recommended.rules, 'react-refresh/only-export-components': ['warn', { allowConstantExport: true }] } },
 )

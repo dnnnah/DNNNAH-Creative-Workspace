@@ -24,4 +24,4 @@ Dos columnas asimétricas y escalonadas desde 353 px; una columna hasta 352 px p
 
 La verificación de navegador cubrió 320, 375, 430, 768, 1280 y 1440 px, los cuatro casos en ES/EN en cada ancho, teclado, foco, menú, enlaces directos, recarga, historial, ausencia de desbordamiento horizontal y reduced motion. Las capturas y el informe JSON se entregan en la conversación.
 
-Las demos se muestran como botones siempre visibles en galería y casos, con nombre accesible del proyecto, en la misma pestaña. No hay botones GitHub sin URL confirmada.
+Las demos se muestran como botones siempre visibles en galería y casos, con nombre accesible del proyecto, en la misma pestaña. GitHub está disponible para NutrIA (dnnnah/nutrIA) y PawPass (dnnnah/petCarnet), con enlaces confirmados por el usuario. Runtime solo muestra Demo y Protech no muestra enlaces externos.

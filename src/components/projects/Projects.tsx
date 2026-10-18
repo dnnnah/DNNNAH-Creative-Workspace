@@ -1,11 +1,15 @@
-import { ArrowDownRight, ArrowLeft, ArrowUpRight, FolderOpen } from 'lucide-react'
+import { ArrowDownRight, ArrowLeft, ArrowUpRight, FolderOpen, Code2 } from 'lucide-react'
 import type { Locale } from '../../i18n/messages'
 import { projects, type Project } from './content'
 import './projects.css'
 
-function ProjectDemo({ project, locale }: { project: Project; locale: Locale }) {
-  if (!project.demo) return null
-  return <a className="project-demo" href={project.demo} aria-label={`${locale === 'es' ? 'Ver demo de' : 'View demo of'} ${project.name}`}>{locale === 'es' ? 'Ver demo' : 'View demo'}<ArrowUpRight size={18} aria-hidden="true" /></a>
+function ProjectLinks({ project, locale }: { project: Project; locale: Locale }) {
+  if (!project.demo && !project.github) return null
+  const es = locale === 'es'
+  return <div className="project-actions">
+    {project.demo && <a className="project-demo" href={project.demo} aria-label={`${es ? 'Ver demo de' : 'View demo of'} ${project.name}`}>{es ? 'Ver demo' : 'View demo'}<ArrowUpRight size={18} aria-hidden="true" /></a>}
+    {project.github && <a className="project-github" href={project.github} aria-label={`${es ? 'Ver GitHub de' : 'View GitHub for'} ${project.name}`}><Code2 size={18} aria-hidden="true" />GitHub<ArrowUpRight size={18} aria-hidden="true" /></a>}
+  </div>
 }
 
 function ProjectArt({ project, locale }: { project: Project; locale: Locale }) {
@@ -30,7 +34,7 @@ export function Projects({ locale }: { locale: Locale }) {
       <p className="project-status">{project.status[locale]}</p><p className="project-summary">{project.summary[locale]}</p>
       {project.tools.length ? <ul className="project-stack" aria-label={`${es ? 'Stack de' : 'Stack for'} ${project.name}`}>{project.tools.map(tool => <li key={tool}>{tool}</li>)}</ul> : <p className="project-stack-pending">{es ? 'Stack por confirmar' : 'Stack to be confirmed'}</p>}
       <details className="project-overview"><summary>{es ? 'Sobre el proyecto' : 'About the project'}</summary><p>{project.context[locale]}</p><a className="project-case-link" href={`#projects/${project.slug}`}>{es ? 'Leer caso de estudio' : 'Read case study'}<ArrowUpRight size={16} aria-hidden="true" /></a></details>
-      <ProjectDemo project={project} locale={locale} />
+      <ProjectLinks project={project} locale={locale} />
     </article>)}</div>
     <p className="projects-end">{es ? 'El contexto también es parte del trabajo.' : 'Context is part of the work, too.'}</p>
   </section>
@@ -41,7 +45,7 @@ export function ProjectCase({ project, locale }: { project: Project; locale: Loc
   const next = projects[(projects.indexOf(project) + 1) % projects.length]
   return <article className="project-case" aria-labelledby="case-title">
     <a className="case-back" href="#projects"><ArrowLeft size={18} aria-hidden="true" />{es ? 'Volver a proyectos' : 'Back to projects'}</a>
-    <div className="case-intro"><h1 id="case-title" tabIndex={-1}>{project.name}</h1><p>{project.status[locale]}</p><p>{project.summary[locale]}</p><ProjectDemo project={project} locale={locale} /></div>
+    <div className="case-intro"><h1 id="case-title" tabIndex={-1}>{project.name}</h1><p>{project.status[locale]}</p><p>{project.summary[locale]}</p><ProjectLinks project={project} locale={locale} /></div>
     <ProjectArt project={project} locale={locale} />
     <div className="case-copy">{[
       [es ? 'Contexto' : 'Context', project.context[locale]],

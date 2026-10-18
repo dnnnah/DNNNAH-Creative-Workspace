@@ -83,5 +83,8 @@
 .project-overview summary:hover, .project-overview summary:focus-visible { background: var(--color-lavender); }
 .project-overview p { font-size: .875rem; padding-block: .5rem; }
 .project-case-link { display: inline-flex; align-items: center; gap: .5rem; min-width: 44px; min-height: 44px; padding-block: .5rem; font-size: .875rem; }
-.project-demo { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; min-width: 44px; padding: .625rem .875rem; margin-top: 1rem; border: 1px solid var(--color-ink); background: var(--color-lime); text-decoration: none; font-size: .875rem; font-weight: 600; }
-.project-demo:hover { background: var(--color-lavender); }
+.project-demo, .project-github { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; min-width: 44px; padding: .625rem .875rem; margin-top: 1rem; border: 1px solid var(--color-ink); background: var(--color-lime); text-decoration: none; font-size: .875rem; font-weight: 600; }
+.project-demo:hover, .project-github:hover { background: var(--color-lavender); }
+
+.project-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.project-github { background: transparent; }

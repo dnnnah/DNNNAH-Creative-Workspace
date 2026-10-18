@@ -1,7 +1,7 @@
 import type { Locale } from '../../i18n/messages'
 
 type Copy = Record<Locale, string>
-export type Project = { slug: string; name: string; status: Copy; summary: Copy; context: Copy; approach: Copy; limits: Copy; tools: string[]; demo?: string }
+export type Project = { slug: string; name: string; status: Copy; summary: Copy; context: Copy; approach: Copy; limits: Copy; tools: string[]; demo?: string; github?: string }
 export const projects: Project[] = [
   {
     slug: 'protech', name: 'Protech',
@@ -13,7 +13,7 @@ export const projects: Project[] = [
     tools: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Supabase', 'Python', 'Cloudinary'],
   },
   {
-    slug: 'pawpass', name: 'PawPass', demo: 'https://pet-carnet.vercel.app/',
+    slug: 'pawpass', name: 'PawPass', demo: 'https://pet-carnet.vercel.app/', github: 'https://github.com/dnnnah/petCarnet',
     status: { es: 'Académico · Incompleto', en: 'Academic · Incomplete' },
     summary: { es: 'Una identidad para cada mascota.', en: 'An identity for every pet.' },
     context: { es: 'Proyecto académico en desarrollo sobre identidad digital para mascotas.', en: 'An academic project in development exploring digital identity for pets.' },
@@ -22,7 +22,7 @@ export const projects: Project[] = [
     tools: ['React', 'Tailwind', 'TypeScript'],
   },
   {
-    slug: 'nutria', name: 'NutrIA', demo: 'https://nutria-bay.vercel.app/',
+    slug: 'nutria', name: 'NutrIA', demo: 'https://nutria-bay.vercel.app/', github: 'https://github.com/dnnnah/nutrIA',
     status: { es: 'Académico · Incompleto', en: 'Academic · Incomplete' },
     summary: { es: 'La nutrición como punto de partida.', en: 'Nutrition as a starting point.' },
     context: { es: 'Una PWA de nutrición, desarrollada como proyecto académico y todavía incompleta.', en: 'A nutrition PWA developed as an academic project, still incomplete.' },

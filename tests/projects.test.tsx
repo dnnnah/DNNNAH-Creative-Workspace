@@ -54,3 +54,20 @@ test('publica únicamente las tres demos confirmadas tanto en tarjetas como en c
     }
   }
 })
+
+test('ofrece GitHub solo para NutrIA y PawPass con los enlaces confirmados', async () => {
+  const { Projects, ProjectCase } = await import('../src/components/projects/Projects')
+  const { projects } = await import('../src/components/projects/content')
+  for (const locale of ['es', 'en'] as const) {
+    const gallery = renderToStaticMarkup(<Projects locale={locale} />)
+    expect(gallery.match(/class="project-github"/g)).toHaveLength(2)
+    for (const [slug, url] of [['nutria', 'https://github.com/dnnnah/nutrIA'], ['pawpass', 'https://github.com/dnnnah/petCarnet']]) {
+      expect(gallery).toContain(`href="${url}"`)
+      const html = renderToStaticMarkup(<ProjectCase project={projects.find(project => project.slug === slug)!} locale={locale} />)
+      expect(html).toContain(`href="${url}"`)
+    }
+    for (const project of projects.filter(project => ['protech', 'dnnnah-runtime'].includes(project.slug))) {
+      expect(renderToStaticMarkup(<ProjectCase project={project} locale={locale} />)).not.toContain('class="project-github"')
+    }
+  }
+})

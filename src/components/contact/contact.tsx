@@ -49,7 +49,7 @@ export function Contact({ locale }: { locale: Locale }) {
        ? <a key={label} className="contact-resource" href={href.trim()}><span>{label}</span><span aria-hidden="true">↗</span></a>
        : <span key={label} className="contact-resource contact-resource--pending" aria-disabled="true"><span>{label}</span><span className="contact-resource-status">{es ? 'Próximamente' : 'Coming soon'}</span></span>)}
      </div>
-     <div className="contact-signature" aria-hidden="true">idea <span>→</span> {es ? 'intención' : 'intention'} <span>→</span> build</div>
+     <div className="contact-signature" aria-hidden="true">idea <span>→</span> {es ? 'intención' : 'intention'} <span>→</span> {es ? 'creación' : 'build'}</div>
     </div>
     <div className="contact-editor">
      <div className="contact-tab"><span>contact.tsx</span><span aria-hidden="true">↗</span></div>

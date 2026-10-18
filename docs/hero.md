@@ -6,7 +6,7 @@ Se sustituye únicamente la pantalla temporal de fundamentos por el Hero. Se con
 
 Composición: titular amplio en dos líneas, etiquetas lima/lavanda, enfoque rotativo a la izquierda y descripción/CTAs a la derecha; apilado móvil. ES inicial y EN seleccionable con lang y título sincronizados. Descripción centrada en dirección de arquitectura y coordinación de agentes IA, sin atribuir escritura manual de todo el código. Enlaces reales al perfil y repositorio de GitHub.
 
-Las cuatro frases cambian automáticamente cada 4500 ms; la pila reserva el alto de la frase más larga sin alturas rígidas. Pausa/reanudación accesible, sin Next. Con prefers-reduced-motion las cuatro frases se muestran estáticas. Se limpian temporizador y listener al desmontar.
+Las cuatro frases cambian automáticamente cada 2500 ms; la pila reserva el alto de la frase más larga sin alturas rígidas. Cada barra es un botón accesible de 44×44 que permite elegir su frase con clic, Enter o Espacio. Al cambiar de frase, la rotación continúa desde la elegida con un nuevo intervalo; si estaba pausada, conserva la pausa. Pausa/reanudación accesible, sin Next. Con prefers-reduced-motion las cuatro frases se muestran estáticas. Se limpian temporizador y listener al desmontar.
 
 ## Comprobaciones
 

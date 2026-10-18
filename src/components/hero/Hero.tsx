@@ -13,14 +13,14 @@ export function Hero({ locale }: { locale: Locale }) {
   const [paused, setPaused] = useState(false)
   useEffect(() => {
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    let stop = startRotation(t.phrases.length, setActive, media.matches || paused)
+    let stop = startRotation(t.phrases.length, setActive, media.matches || paused, active)
     const update = () => {
       stop()
-      stop = startRotation(t.phrases.length, setActive, media.matches || paused)
+      stop = startRotation(t.phrases.length, setActive, media.matches || paused, active)
     }
     media.addEventListener('change', update)
     return () => { stop(); media.removeEventListener('change', update) }
-  }, [t.phrases.length, paused])
+  }, [t.phrases.length, paused, active])
 
   return <section className="hero" aria-labelledby="hero-title">
     <div className="hero-heading editorial-grid">
@@ -35,7 +35,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <ul className="phrase-stack" aria-label={locale === 'es' ? 'Mi enfoque' : 'My approach'}>
           {t.phrases.map((phrase, index) => <li key={index} className={index === active ? 'phrase is-active' : 'phrase'}><span>{phrase}</span></li>)}
         </ul>
-        <div className="phrase-progress" aria-hidden="true">{t.phrases.map((_, index) => <span key={index} className={index === active ? 'is-active' : ''} />)}</div>
+        <div className="phrase-progress" role="group" aria-label={locale === 'es' ? 'Seleccionar frase' : 'Select phrase'}>{t.phrases.map((phrase, index) => <button key={index} type="button" className={index === active ? 'is-active' : ''} aria-label={`${locale === 'es' ? 'Mostrar frase' : 'Show phrase'} ${index + 1}: ${phrase}`} aria-pressed={index === active} onClick={() => setActive(index)}><span aria-hidden="true" /></button>)}</div>
         <Button variant="secondary" className="rotation-toggle" aria-pressed={paused} onClick={() => setPaused(!paused)}>{locale === 'es' ? (paused ? 'Reanudar frases' : 'Pausar frases') : (paused ? 'Resume phrases' : 'Pause phrases')}</Button>
       </div>
       <div className="hero-summary">

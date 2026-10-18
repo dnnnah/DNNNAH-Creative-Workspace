@@ -37,6 +37,9 @@ export function Navbar({ locale, onLocaleChange }: { locale: Locale; onLocaleCha
     if (open && !event.currentTarget.contains(event.relatedTarget)) setOpen(false)
   }}>
     <a className="wordmark" href="#main" aria-label={es ? 'DNNNAH — inicio' : 'DNNNAH — home'}><span className="brand-mark" aria-hidden="true">D.</span>DNNNAH</a>
+    <div className="language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
+      {(['es', 'en'] as const).map(language => <button key={language} type="button" lang={language} aria-label={language === 'es' ? 'Español' : 'English'} aria-pressed={locale === language} onClick={() => onLocaleChange(language)}>{language.toUpperCase()}</button>)}
+    </div>
     <button ref={toggle} className="menu-toggle" type="button" aria-label={es ? (open ? 'Cerrar menú' : 'Abrir menú') : (open ? 'Close menu' : 'Open menu')} aria-expanded={open} aria-controls="primary-navigation" onClick={() => open ? close() : setOpen(true)}>
       {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
     </button>
@@ -54,8 +57,6 @@ export function Navbar({ locale, onLocaleChange }: { locale: Locale; onLocaleCha
         )}
       </div>
     </nav>
-    <div className="language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
-      {(['es', 'en'] as const).map(language => <button key={language} type="button" lang={language} aria-label={language === 'es' ? 'Español' : 'English'} aria-pressed={locale === language} onClick={() => onLocaleChange(language)}>{language.toUpperCase()}</button>)}
-    </div>
+
   </header>
 }

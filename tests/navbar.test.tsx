@@ -8,8 +8,9 @@ test('ofrece los destinos existentes y señaliza los pendientes sin enlaces roto
   expect(html).toContain('href="#about"')
   expect(html).toContain('href="#skills"')
   expect(html).toContain('aria-current="page"')
-  expect(html.match(/aria-disabled="true"/g)).toHaveLength(4)
-  for (const target of ['projects', 'contact']) expect(html).not.toContain(`href="#${target}"`)
+  expect(html.match(/aria-disabled="true"/g)).toHaveLength(3)
+  expect(html).toContain('href="#projects"')
+  for (const target of ['contact']) expect(html).not.toContain(`href="#${target}"`)
   expect(html).toContain('Próximamente')
 })
 

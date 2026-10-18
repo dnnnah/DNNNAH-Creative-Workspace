@@ -6,9 +6,10 @@ test('ofrece los destinos existentes y señaliza los pendientes sin enlaces roto
   const html = renderToStaticMarkup(<Navbar locale="es" onLocaleChange={() => {}} />)
   expect(html).toContain('href="#main"')
   expect(html).toContain('href="#about"')
+  expect(html).toContain('href="#skills"')
   expect(html).toContain('aria-current="page"')
-  expect(html.match(/aria-disabled="true"/g)).toHaveLength(5)
-  for (const target of ['skills', 'projects', 'contact']) expect(html).not.toContain(`href="#${target}"`)
+  expect(html.match(/aria-disabled="true"/g)).toHaveLength(4)
+  for (const target of ['projects', 'contact']) expect(html).not.toContain(`href="#${target}"`)
   expect(html).toContain('Próximamente')
 })
 

@@ -37,7 +37,7 @@ export function Contact({ locale }: { locale: Locale }) {
  }
  return <>
   <section id="contact" className="contact" tabIndex={-1} aria-labelledby="contact-title">
-   <div className="contact-index"><span><PanelTop size={18} aria-hidden="true" />05 / contact.tsx</span><span>{es ? 'La siguiente idea empieza aquí' : 'The next idea starts here'}</span></div>
+   <div className="contact-index"><span><PanelTop size={18} aria-hidden="true" />contact.tsx</span><span>{es ? 'La siguiente idea empieza aquí' : 'The next idea starts here'}</span></div>
    <div className="contact-layout">
     <div className="contact-intro">
      <p className="contact-comment">// {es ? 'de idea a experiencia' : 'from idea to experience'}</p>

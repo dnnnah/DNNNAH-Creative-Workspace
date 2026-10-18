@@ -14,7 +14,7 @@ export function App() {
     <a className="skip-link" href="#main">{t.skip}</a>
     <div className="page">
       <header className="masthead">
-        <span className="wordmark">DNNNAH<span className="brand-dot" aria-hidden="true">.</span></span>
+        <span className="wordmark"><span className="brand-mark" aria-hidden="true">D.</span>DNNNAH</span>
         <nav className="language" aria-label={t.language}>
           {(['es', 'en'] as const).map(language => <button key={language} type="button" lang={language} aria-label={language === 'es' ? 'Español' : 'English'} aria-pressed={locale === language} onClick={() => setLocale(language)}>{language.toUpperCase()}</button>)}
         </nav>

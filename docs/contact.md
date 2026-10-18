@@ -38,3 +38,9 @@ Context7 se intentó y devolvió clave inválida; alternativa oficial:
 Revisión contra `src/styles/index.css`, About, Skills y Projects, y capturas ES de Contact a 1440 y 375 px. Contact reutiliza los cuatro tokens de color existentes (crema, tinta, lima y lavanda) y las familias Space Grotesk para títulos, Inter para cuerpo/campos y JetBrains Mono para etiquetas y metadatos. La barra de archivo y los separadores continúan el lenguaje de las secciones existentes. La composición editorial usa columnas 1:1.1 en escritorio y una columna por debajo de 55 rem; ambas capturas muestran el formulario y su aviso de envío inactivo legibles.
 
 El editor introduce una sombra sólida lavanda de 8 px (4 px en pantallas estrechas), sin animaciones ni transiciones nuevas. Su superficie blanca prolonga un uso ya presente en navegación y enlaces; los grises auxiliares y el rojo de error son valores locales de estados, sin redefinir los tokens globales. El sistema previo ya combina esquinas rectas con radios en navegación/filtros y colores auxiliares locales en Projects: esa variación preexistente no se normaliza en esta extensión. Se conserva el foco y la preferencia de movimiento reducido globales. No se detectaron bloqueadores de coherencia visual en esta revisión; las capturas no verifican estados de error ni entrega de correo.
+
+## CV y LinkedIn
+
+Los apartados están visibles bajo «Perfil y trayectoria» (ES) / «Profile and experience» (EN). Mientras no tengan ruta muestran «Próximamente» / «Coming soon» sin enlace ficticio. GitHub conserva su destino confirmado.
+
+Para activarlos, editar `src/components/contact/links.ts`: `cv` admite una ruta pública al PDF (guardar en `public/cv.pdf` y escribir `/cv.pdf`) o una URL HTTPS; `linkedin` admite la URL completa del perfil. Guardar y reconstruir. No introducir rutas locales del ordenador, que no son accesibles al visitante. El CV se abre como documento; no se fuerza descarga.

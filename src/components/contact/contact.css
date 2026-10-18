@@ -6,7 +6,12 @@
 .contact-intro h2 { font-size: clamp(2.75rem, 5.8vw, 5.5rem); line-height: 1.05; letter-spacing: -.04em; overflow-wrap: anywhere; }
 .contact-intro h2 span { background: var(--color-lavender); box-decoration-break: clone; padding-inline: .1em; }
 .contact-description { margin-top: 2rem; max-width: 36ch; }
-.contact-profile { display: flex; align-items: center; justify-content: space-between; gap: 2rem; width: fit-content; min-height: 48px; margin-top: 1.5rem; font: .8125rem var(--font-mono); }
+.contact-resources { margin-top: 2rem; max-width: 28rem; }
+.contact-resources h3 { margin: 0 0 .75rem; font: .75rem var(--font-mono); }
+.contact-resource { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 52px; padding-block: .75rem; border-bottom: 1px solid #aaa99f; font: .8125rem var(--font-mono); text-decoration: none; }
+.contact-resource[href]:hover { background: var(--color-lavender); }
+.contact-resource--pending { color: #59584f; }
+.contact-resource-status { font: .6875rem var(--font-sans); }
 .contact-signature { margin-top: 4rem; font: .75rem var(--font-mono); display: flex; gap: .75rem; flex-wrap: wrap; }
 .contact-signature span { background: var(--color-lime); padding-inline: .4rem; }
 .contact-editor { border: 1px solid var(--color-ink); min-width: 0; background: #fff; box-shadow: 8px 8px 0 var(--color-lavender); }

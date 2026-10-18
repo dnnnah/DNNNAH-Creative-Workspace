@@ -20,7 +20,7 @@ Al implementar cada sección, añadir su id real y sustituir el elemento pendien
 
 El menú hamburguesa con Lucide Menu/X es el acceso principal en todos los tamaños. El disparador solo contiene el icono y tiene aria-label localizado. El desplegable es no modal: Tab recorre el enlace y los controles sin atrapar el foco. Al abrir se enfoca hero.tsx; Escape y el botón de cierre devuelven el foco al disparador. Salir de la cabecera o pulsar fuera cierra el menú; activar hero.tsx cierra y enfoca main. Las opciones pendientes son texto con aria-disabled, sin href ni tabulación. Workspace y Terminal tienen iconos Lucide y estado Pendiente/Pending.
 
-La cabecera usa sticky con top: 0, z-index 30, crema #F6F5F0 al 96% y separador fino. El desplegable se superpone sin desplazar el Hero y admite scroll interno en pantallas bajas. La navegación por anclas reserva la altura de la cabecera; el enlace de salto queda por encima de ella.
+La cabecera usa sticky con top: 0, z-index 30, blanco #FFFFFF al 96% y separador fino. La hamburguesa y el desplegable comparten el centro de la cabecera, independientemente del ancho de la marca y el selector de idioma. El panel blanco tiene bordes cálidos, filas de 48px y foco interior para evitar recortes. El scroll interno no se propaga a la página al alcanzar sus límites. El desplegable se superpone sin desplazar el Hero y admite scroll interno en pantallas bajas. La navegación por anclas reserva la altura de la cabecera; el enlace de salto queda por encima de ella.
 Marca, controles y enlace activo tienen objetivos de al menos 44px. El menú no añade animaciones; se conserva la regla global de reduced motion.
 
 ## Validación actual

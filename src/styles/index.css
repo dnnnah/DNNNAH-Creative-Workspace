@@ -118,6 +118,7 @@ p { line-height: 1.65; max-width: 70ch; }
 .masthead .language { padding-left: .875rem; border-left: 1px solid #aaa99f; gap: .125rem; }
 .masthead .language button { font-family: var(--font-mono); font-size: .75rem; border-radius: 4px; }
 .menu-toggle { display: none; }
+.menu-toggle span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (max-width: 69.999rem) {
  .masthead { display: grid; grid-template-columns: 1fr auto auto; gap: .5rem; }
  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; gap: .5rem; min-height: 44px; min-width: 44px; padding: .5rem .625rem; border: 1px solid var(--color-ink); border-radius: 4px; background: transparent; font-size: .75rem; }
@@ -130,7 +131,6 @@ p { line-height: 1.65; max-width: 70ch; }
  .masthead .language { padding-left: .5rem; }
 }
 @media (max-width: 25rem) {
- .menu-toggle span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
  .masthead .wordmark { font-size: 1rem; gap: .375rem; }
  .masthead .language { border-left: 0; padding-left: 0; }
 }

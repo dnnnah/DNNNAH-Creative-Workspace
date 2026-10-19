@@ -19,9 +19,17 @@ test('cada enlace de galería resuelve un caso bilingüe con retorno y sin enlac
       const html = renderToStaticMarkup(<ProjectCase project={project!} locale={locale} />)
       expect(html).toContain('href="#projects"')
       expect(html).toContain('id="case-title"')
-      expect(html).toContain(locale === 'es' ? 'Estado y alcance' : 'Status and scope')
-      expect(html).toContain(locale === 'es' ? 'No es una captura' : 'Not a screenshot')
-      if (slug === 'protech') expect(html).not.toContain('href="http')
+      expect(html).toContain(locale === 'es' ? 'Caso anterior' : 'Previous case study')
+      expect(html).toContain(locale === 'es' ? 'Siguiente caso' : 'Next case study')
+      if (slug === 'protech') {
+        expect(html).toContain(locale === 'es' ? 'Lo que queda como siguiente posibilidad.' : 'Ideas still awaiting approval.')
+        expect(html).toContain('href="#projects/dnnnah-runtime"')
+        expect(html).toContain('href="#projects/pawpass"')
+        expect(html).not.toContain('href="http')
+      } else {
+        expect(html).toContain(locale === 'es' ? 'Estado y alcance' : 'Status and scope')
+        expect(html).toContain(locale === 'es' ? 'No es una captura' : 'Not a screenshot')
+      }
     }
   }
   expect(projectFromHash('#projects/desconocido')).toBeUndefined()

@@ -94,8 +94,8 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen
       if (taps.current.count === 3) { taps.current.count = 0; discover() }
     }}>D.</button><a className="wordmark" href="#main" aria-label={es ? 'DNNNAH — inicio' : 'DNNNAH — home'}>DNNNAH</a></div>
     <button className="sound-toggle" type="button" aria-label={es ? (sound ? 'Desactivar sonidos' : 'Activar sonidos') : (sound ? 'Disable sounds' : 'Enable sounds')} aria-pressed={sound} onClick={toggleSound}>{sound ? <Volume2 size={18} aria-hidden="true" /> : <VolumeX size={18} aria-hidden="true" />}<span>{sound ? 'ON' : 'OFF'}</span></button>
-    <div className="language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
-      {(['es', 'en'] as const).map(language => <button key={language} type="button" lang={language} aria-label={language === 'es' ? 'Español' : 'English'} aria-pressed={locale === language} onClick={() => onLocaleChange(language)}>{language.toUpperCase()}</button>)}
+    <div className="language">
+      <button className="language-toggle" type="button" lang={es ? 'en' : 'es'} aria-label={es ? 'Cambiar idioma a inglés' : 'Switch language to Spanish'} title={es ? 'Cambiar idioma a inglés' : 'Switch language to Spanish'} onClick={() => onLocaleChange(es ? 'en' : 'es')}>{es ? 'EN' : 'ES'}</button>
     </div>
     <button className="terminal-shortcut" type="button" aria-label={`${es ? 'Abrir Terminal' : 'Open Terminal'} (${shortcut})`} aria-keyshortcuts={apple ? 'Meta+K' : 'Control+K'} aria-haspopup="dialog" onClick={() => {
       setOpen(false)

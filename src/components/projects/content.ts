@@ -6,10 +6,10 @@ export const projects: Project[] = [
   {
     slug: 'protech', name: 'Protech',
     status: { es: 'Freelance · Remunerado', en: 'Freelance · Paid work' },
-    summary: { es: 'Audio y accesorios para el camino.', en: 'Audio and accessories for the road.' },
-    context: { es: 'Una PWA realizada como trabajo freelance remunerado para el sector de audio y accesorios automotrices.', en: 'A PWA created as paid freelance work for the automotive audio and accessories sector.' },
-    approach: { es: 'React, Vite y TypeScript forman la base de la interfaz, con Tailwind para estilos. El trabajo también incluye Supabase, scripts Python y Cloudinary.', en: 'React, Vite and TypeScript form the interface foundation, with Tailwind for styling. The work also includes Supabase, Python scripts and Cloudinary.' },
-    limits: { es: 'No se documentan aquí funcionalidades concretas, métricas ni estado de despliegue. La composición visual evoca el audio; no es una captura del producto.', en: 'Specific features, metrics and deployment status are not documented here. The visual composition evokes audio; it is not a product screenshot.' },
+    summary: { es: 'Un catálogo digital para encontrar flyers, precios y existencias de audio y accesorios automotrices.', en: 'A digital catalog for finding flyers, pricing and stock across automotive audio and accessories.' },
+    context: { es: 'Los flyers, precios y existencias estaban repartidos entre carpetas de Google Drive, listas y conversaciones de WhatsApp. El equipo necesitaba reunirlos en una herramienta ágil para consultar productos y preparar solicitudes.', en: 'Flyers, prices and stock were spread across Google Drive folders, price lists and WhatsApp conversations. The team needed one fast way to find products and prepare order requests.' },
+    approach: { es: 'Empezó como un catálogo y evolucionó a una PWA con búsqueda, filtros, precios por categoría, existencias y cotizaciones en PDF. La experiencia se adaptó a clientes, vendedores y administración.', en: 'It began as a catalog and grew into a PWA with search, filters, category pricing, stock visibility and PDF quotes. The experience serves customers, sellers and administrators.' },
+    limits: { es: 'El PDF facilita enviar la solicitud al área de pedidos por WhatsApp; no confirma por sí solo una compra. Las cifras de ahorro son reportes de vendedores, no analítica instrumentada.', en: 'The PDF makes it easier to send a request to the order team over WhatsApp; it does not confirm a purchase by itself. Time savings are seller reports, not instrumented analytics.' },
     tools: ['React', 'Vite', 'TypeScript', 'Tailwind', 'Supabase', 'Python', 'Cloudinary'],
   },
   {

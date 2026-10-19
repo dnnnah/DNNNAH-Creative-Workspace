@@ -95,9 +95,9 @@ export function Workspace({ locale, onLocaleChange, onClose, onNavigate }: { loc
       <div className="ws-explorer-foot"><span aria-hidden="true">{'{ }'}</span><p>{es ? 'Abre un archivo. Encuentra una idea.' : 'Open a file. Find an idea.'}</p></div>
     </nav>
     <section className="ws-editor" aria-label={es ? 'Documentos del portfolio' : 'Portfolio documents'}>
-      <div className="ws-tabs" role="tablist" aria-label={es ? 'Archivos abiertos' : 'Open files'}>{tabs.map(id => {
+      <div className="ws-tabs"><div role="tablist" aria-label={es ? 'Archivos abiertos' : 'Open files'} aria-owns={tabs.map(id => `ws-tab-${id}`).join(' ')} />{tabs.map(id => {
         const item = workspaceFiles.find(entry => entry.id === id)!
-        return <div key={id} className="ws-tab" role="presentation" data-active={active === id}>
+        return <div key={id} className="ws-tab" data-active={active === id}>
           <button id={`ws-tab-${id}`} role="tab" aria-selected={active === id} aria-controls={`ws-panel-${id}`} tabIndex={active === id ? 0 : -1} onClick={() => select(id)} onKeyDown={event => tabKey(event, id)}><FileIcon file={item} />{item.name}</button>
           <button className="ws-tab-close" aria-label={`${es ? 'Cerrar' : 'Close'} ${item.name}`} tabIndex={active === id ? 0 : -1} onClick={() => closeFile(id)}><X size={16} aria-hidden="true" /></button>
         </div>

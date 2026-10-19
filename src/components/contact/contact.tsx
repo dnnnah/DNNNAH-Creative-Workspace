@@ -73,6 +73,6 @@ export function Contact({ locale }: { locale: Locale }) {
     </div>
    </div>
   </section>
-  <footer className="contact-footer"><a className="contact-footer-brand" href="#main">DNNNAH<span>© {new Date().getFullYear()}</span></a><nav aria-label={es ? 'Navegación del pie' : 'Footer navigation'}><a href="#projects">projects/</a><a href="#contact">contact.tsx</a><a href="#main">hero.tsx ↑</a></nav><p>{es ? 'Intención en cada decisión.' : 'Intention in every decision.'}</p></footer>
+  <footer className="contact-footer" role="contentinfo"><a className="contact-footer-brand" href="#main">DNNNAH<span>© {new Date().getFullYear()}</span></a><nav aria-label={es ? 'Navegación del pie' : 'Footer navigation'}><a href="#projects">projects/</a><a href="#contact">contact.tsx</a><a href="#main">hero.tsx ↑</a></nav><p>{es ? 'Intención en cada decisión.' : 'Intention in every decision.'}</p></footer>
  </>
 }

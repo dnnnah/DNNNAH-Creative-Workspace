@@ -1,13 +1,13 @@
 .project-case--protech { padding-bottom: clamp(3rem, 8vw, 7rem); }
 .protech-filebar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1.5rem; padding-block: .75rem; border-block: 1px solid #aaa99f; font: .75rem var(--font-mono); }
-.protech-filebar > :last-child { color: #57564f; }
+.protech-filebar > :last-child { color: #515049; }
 .protech-hero { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(17rem, .75fr); align-items: end; gap: clamp(2rem, 6vw, 6rem); padding-block: clamp(3rem, 8vw, 7rem); }
 .protech-hero h1 { max-width: 11ch; font-size: clamp(3.25rem, 8vw, 7rem); line-height: .98; letter-spacing: -.045em; }
 .protech-hero__lead { max-width: 52ch; margin-top: 1.5rem; font-size: clamp(1.1rem, 1.6vw, 1.35rem); line-height: 1.65; }
 .protech-meta { display: grid; gap: 0; margin: 0; border-top: 1px solid #aaa99f; }
 .protech-meta > div { display: grid; grid-template-columns: minmax(6.5rem, .7fr) 1.3fr; gap: .75rem; padding-block: .85rem; border-bottom: 1px solid #aaa99f; }
 .protech-meta dt, .protech-meta dd { margin: 0; }
-.protech-meta dt { color: #55544e; font-family: var(--font-mono); font-size: .6875rem; text-transform: uppercase; letter-spacing: .04em; }
+.protech-meta dt { color: #515049; font-family: var(--font-mono); font-size: .6875rem; text-transform: uppercase; letter-spacing: .04em; }
 .protech-meta dd { font-size: .8125rem; line-height: 1.55; }
 .protech-section { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(1.5rem, 5vw, 5rem); padding-block: clamp(2.5rem, 6vw, 5rem); border-top: 1px solid #aaa99f; }
 .protech-section h2, .protech-scope h2 { max-width: 18ch; font-size: clamp(1.75rem, 3.5vw, 3rem); line-height: 1.12; }
@@ -16,14 +16,14 @@
 .protech-source-path { display: flex; flex-wrap: wrap; align-items: center; gap: .25rem .5rem; margin-top: 2rem; }
 .protech-source-path > span { display: inline-flex; align-items: center; gap: .5rem; }
 .protech-source-path strong { padding: .5rem .7rem; background: var(--color-lavender); font-family: var(--font-mono); font-size: .75rem; font-weight: 500; }
-.protech-problem small, .protech-timeline-note, .protech-model figcaption, .protech-model > p, .protech-scripts small { display: block; margin-top: .75rem; color: #55544e; font-size: .75rem; line-height: 1.6; }
+.protech-problem small, .protech-timeline-note, .protech-model figcaption, .protech-model > p, .protech-scripts small { display: block; margin-top: .75rem; color: #515049; font-size: .75rem; line-height: 1.6; }
 .protech-origin { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); }
 .protech-origin__copy p { margin-top: 1rem; max-width: 54ch; }
 .protech-timeline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-content: start; gap: 1.25rem; margin: 0; }
 .protech-timeline > div { padding-top: .75rem; border-top: 3px solid var(--color-lime); }
 .protech-timeline dt { font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; letter-spacing: -.035em; }
 .protech-timeline dd { margin: .25rem 0 0; font-size: .875rem; }
-.protech-timeline-note { max-width: 60ch; grid-column: 2; margin-top: -1.5rem; color: #55544e; font-size: .75rem; line-height: 1.6; }
+.protech-timeline-note { max-width: 60ch; grid-column: 2; margin-top: -1.5rem; color: #515049; font-size: .75rem; line-height: 1.6; }
 @media (max-width: 58rem) { .protech-timeline-note { grid-column: auto; margin-top: -.5rem; } }
 .protech-section__intro { display: grid; align-content: start; gap: 1rem; }
 .protech-section__intro p { max-width: 50ch; }
@@ -37,13 +37,15 @@
 .protech-phone-figure { min-width: 0; margin: 0; }
 .protech-phone-stage { display: grid; justify-items: center; min-width: 0; container-type: inline-size; }
 .protech-phone { margin: 0; }
-.protech-phone__screen { width: 100%; height: 100%; overflow-y: auto; overscroll-behavior: contain; border-radius: inherit; background: #fff; scrollbar-width: none; touch-action: pan-y; -webkit-overflow-scrolling: touch; }
+.protech-phone__screen { width: 100%; height: 100%; overflow-y: auto; overscroll-behavior: contain; border-radius: inherit; background: #fff; scrollbar-width: thin; scrollbar-color: rgb(23 23 23 / 35%) transparent; touch-action: pan-y; -webkit-overflow-scrolling: touch; }
+.protech-phone__screen:focus-visible { outline: 3px solid var(--color-lime); outline-offset: -3px; }
 .protech-phone__screen img { display: block; width: 100%; height: auto; }
-.protech-phone__screen::-webkit-scrollbar { display: none; }
+.protech-phone__screen::-webkit-scrollbar { width: 5px; }
+.protech-phone__screen::-webkit-scrollbar-thumb { background: rgb(23 23 23 / 35%); border-radius: 999px; }
 .protech-phone-figure figcaption { display: grid; gap: .4rem; max-width: 28rem; margin: 1rem auto 0; }
 .protech-phone-figure figcaption strong { font-family: var(--font-display); font-size: 1.125rem; }
 .protech-phone-figure figcaption span { font-size: .8125rem; line-height: 1.6; }
-.protech-phone-figure figcaption small { color: #55544e; font: .6875rem var(--font-mono); }
+.protech-phone-figure figcaption small { color: #515049; font: .6875rem var(--font-mono); }
 .protech-data { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
 .protech-data > .protech-section__intro, .protech-data > .protech-model, .protech-data > .protech-postgres, .protech-data > .protech-automation, .protech-data > .protech-scripts { grid-column: 1 / -1; }
 .protech-model { display: grid; grid-template-columns: 1fr; margin: 0; padding: clamp(1rem, 3vw, 2rem); border: 1px solid #aaa99f; background: #fff; }
@@ -52,12 +54,12 @@
 .protech-model__flyer { display: grid; gap: .4rem; padding: 1rem; border: 1px solid #171717; background: var(--color-cream); }
 .protech-model__flyer > span { font: .6875rem var(--font-mono); text-transform: uppercase; }
 .protech-model__flyer strong { font-family: var(--font-display); font-size: 1.125rem; }
-.protech-model__connector { display: grid; justify-items: center; gap: .35rem; color: #55544e; text-align: center; font: .6875rem var(--font-mono); }
+.protech-model__connector { display: grid; justify-items: center; gap: .35rem; color: #515049; text-align: center; font: .6875rem var(--font-mono); }
 .protech-model__skus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
 .protech-model__sku { display: grid; gap: .5rem; padding: .85rem; border: 1px solid #aaa99f; }
 .protech-model__sku strong { font-family: var(--font-display); }
 .protech-model__sku span { font-size: .75rem; line-height: 1.5; }
-.protech-model__more { grid-column: 1 / -1; color: #55544e; font: 1.5rem var(--font-mono); line-height: .5; text-align: center; }
+.protech-model__more { grid-column: 1 / -1; color: #515049; font: 1.5rem var(--font-mono); line-height: .5; text-align: center; }
 .protech-model > p { margin-bottom: 0; }
 .protech-postgres { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(12rem, .5fr); gap: 2rem; align-items: start; padding-top: 1.5rem; border-top: 1px solid #aaa99f; }
 .protech-postgres h3, .protech-scripts h3, .protech-practice h3 { margin: 0 0 .75rem; font-family: var(--font-display); font-size: 1.375rem; line-height: 1.2; }
@@ -71,7 +73,7 @@
 .protech-flow-lane__node { display: grid; align-content: start; gap: .5rem; min-height: 8rem; padding: .85rem; border-block: 1px solid #aaa99f; }
 .protech-flow-lane__node strong { font-family: var(--font-display); font-size: .9375rem; }
 .protech-flow-lane__node span { color: #35342f; font-size: .75rem; line-height: 1.55; }
-.protech-flow-lane__arrow { color: #55544e; }
+.protech-flow-lane__arrow { color: #515049; }
 .protech-flow-lane__arrow--down { display: none; }
 .protech-arrival-note { max-width: none; margin-top: 1rem; font-size: .8125rem !important; }
 .protech-scripts { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: start; gap: clamp(1.5rem, 4vw, 4rem); padding-top: 1.5rem; border-top: 1px solid #aaa99f; }
@@ -82,11 +84,11 @@
 .protech-scripts .protech-flow-lane__node { min-height: 0; }
 .protech-scripts .protech-flow-lane__arrow--right { display: none; }
 .protech-scripts .protech-flow-lane__arrow--down { display: block; margin: .35rem auto; }
-.protech-scripts small { color: #55544e; }
+.protech-scripts small { color: #515049; }
 .protech-practice { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); }
 .protech-practice aside { padding-left: 1.25rem; border-left: 1px solid #aaa99f; }
 .protech-impact { align-items: start; }
-.protech-impact > div:first-child p { margin-top: 1rem; color: #55544e; font-size: .8125rem; }
+.protech-impact > div:first-child p { margin-top: 1rem; color: #515049; font-size: .8125rem; }
 .protech-impact__statement { display: grid; gap: 1rem; padding: 1.25rem; background: var(--color-lime); }
 .protech-impact__statement strong { max-width: 18ch; font-family: var(--font-display); font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.1; }
 .protech-impact__statement p { font-size: .875rem; }

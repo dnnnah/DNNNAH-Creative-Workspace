@@ -9,7 +9,7 @@ export function About({ locale }: { locale: Locale }) {
   return <section id="about" className="about" aria-labelledby="about-title" tabIndex={-1}>
     <div className="about-filebar"><span><FileText size={18} aria-hidden="true" />about.md</span><span>{locale === 'es' ? 'Persona detrás del proceso' : 'Person behind the process'}<ArrowUpRight size={16} aria-hidden="true" /></span></div>
     <div className="about-opening editorial-grid">
-      <h2 id="about-title">{locale === 'es' ? <>Más que<br />solo <span>código.</span></> : <>More than<br />just <span>code.</span></>}</h2>
+      <h2 id="about-title">{locale === 'es' ? <>Más que <br />solo <span>código.</span></> : <>More than <br />just <span>code.</span></>}</h2>
       <figure className="about-portrait" aria-label={t.portrait}>
         <div className="portrait-composition" aria-hidden="true"><div className="portrait-orbit" /><div className="portrait-stem" /><div className="portrait-bowl" /><Asterisk className="portrait-star" strokeWidth={1.2} /><span className="portrait-dot" /></div>
         <figcaption>{locale === 'es' ? 'D. / en construcción continua' : 'D. / a continuous work in progress'}</figcaption>

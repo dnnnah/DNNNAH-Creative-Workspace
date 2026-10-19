@@ -78,7 +78,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
   }
   function containFocus(event: KeyboardEvent<HTMLDialogElement>) {
     if (event.key !== 'Tab' || event.defaultPrevented) return
-    const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button, input, a[href]')).filter(element => element.getClientRects().length && element.tabIndex >= 0)
+    const controls = Array.from(event.currentTarget.querySelectorAll<HTMLElement>('button, input, a[href], [tabindex="0"]')).filter(element => element.getClientRects().length && element.tabIndex >= 0)
     const first = controls[0]
     const last = controls[controls.length - 1]
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }

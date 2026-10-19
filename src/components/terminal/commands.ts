@@ -2,11 +2,12 @@ import { messages, type Locale } from '../../i18n/messages'
 import { aboutCopy } from '../about/content'
 import { technologies } from '../skills/content'
 import { projects } from '../projects/content'
+import { portfolioHistory } from './history'
 import { contactLinks } from '../contact/links'
 import { sectionFiles } from '../workspace/files'
 
-export type CommandResult = { text: string; links?: { label: string; href: string }[]; navigate?: string; message?: string; action?: 'clear' | 'exit' | 'matrix' }
-export const commands = ['help', 'ls', 'ls -la', 'pwd', 'cat <archivo>', 'open <sección>', 'skills', 'stack', 'projects', 'whoami', 'hire', 'contact', 'contact --msg', 'cv', 'git status', 'git blame', 'easter', 'curl cheat-sheet', 'sudo make-coffee', 'sudo rm -rf /', 'matrix', 'clear', 'exit']
+export type CommandResult = { text: string; links?: { label: string; href: string }[]; navigate?: string; action?: 'clear' | 'exit' | 'matrix' }
+export const commands = ['help', 'ls', 'ls -la', 'pwd', 'cat <archivo>', 'open <sección>', 'skills', 'stack', 'projects', 'whoami', 'hire', 'contact', 'contact --msg', 'cv', 'git status', 'git log --oneline', 'git blame', 'easter', 'curl cheat-sheet', 'sudo make-coffee', 'sudo rm -rf /', 'matrix', 'clear', 'exit']
 const routes: Record<string, string> = Object.fromEntries(sectionFiles.flatMap(file => [[file.id, file.href], [file.name, file.href]]))
 const projectLinks = () => projects.map(project => ({ label: project.name, href: `#projects/${project.slug}` }))
 export function completeCommand(input: string): string[] {
@@ -32,17 +33,16 @@ export function executeCommand(input: string, locale: Locale): CommandResult {
     const href = contactLinks.cv.trim()
     return href ? { text: es ? 'Currículum de Donnovan.' : 'Donnovan’s résumé.', links: [{ label: es ? 'Ver CV' : 'View résumé', href }] } : { text: es ? 'El CV todavía no está disponible. Puedes usar contact para conversar conmigo.' : 'The résumé is not available yet. Use contact to get in touch.' }
   }
-  if (value === 'contact') return { text: es ? 'Abriendo Contact.' : 'Opening Contact.', navigate: '#contact' }
-  const messageMatch = raw.match(/^contact\s+--msg(?:\s+([\s\S]*))?$/)
-  if (messageMatch) {
-    let message = messageMatch[1] ?? ''
-    if (message.startsWith('"') || message.startsWith("'")) {
-      if (message.length < 2 || message.at(-1) !== message[0]) return { text: es ? 'Cierra las comillas. Ejemplo: contact --msg "Hola Donnovan"' : 'Close the quotation marks. Example: contact --msg "Hello Donnovan"' }
-      message = message.slice(1, -1)
-    }
-    if (message.length > 4000) return { text: es ? 'El mensaje supera los 4000 caracteres.' : 'The message exceeds 4000 characters.' }
-    return { text: es ? 'Preparando borrador en Contact. Revisa el formulario antes de enviar.' : 'Preparing a draft in Contact. Review the form before sending.', navigate: '#contact', message }
+  if (value === 'contact') return {
+    text: es ? 'Conversemos. Estos son mis canales de contacto:' : 'Let’s talk. Here are my contact channels:',
+    links: [
+      { label: contactLinks.email, href: `mailto:${contactLinks.email}` },
+      { label: 'LinkedIn / donnovan-tc', href: contactLinks.linkedin },
+      { label: 'GitHub / dnnnah', href: contactLinks.github },
+    ],
   }
+  if (/^contact\s+--msg(?:\s|$)/.test(raw)) return { text: '503 — dispatch failed. try the form at contact' }
+  if (value === 'git log --oneline') return { text: `${es ? 'Historial del portfolio · instantánea documentada' : 'Portfolio history · documented snapshot'}\n\n${portfolioHistory.join('\n')}` }
   if (value === 'git status' || value === 'git stattus') return { text: es ? 'En la rama main\nNada para hacer commit, árbol de trabajo limpio.\n\nSimulación del portfolio; no consulta tu repositorio.' : 'On branch main\nNothing to commit, working tree clean.\n\nPortfolio simulation; does not inspect your repository.' }
   if (value === 'easter') return { text: es ? 'Pequeños desvíos: \n  sudo make-coffee  — café imaginario\n  matrix            — sigue al conejo blanco\n  sudo rm -rf /     — el sentido común tiene permisos de administrador' : 'Small detours: \n  sudo make-coffee  — imaginary coffee\n  matrix            — follow the white rabbit\n  sudo rm -rf /     — common sense has administrator privileges' }
   if (value === 'ls') return { text: sectionFiles.map(file => file.name).join('  ') }

@@ -35,14 +35,39 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen
   }, [apple, onTerminalOpen])
 
   useEffect(() => {
-    const sync = () => setActive(location.hash.startsWith('#projects') ? 'projects' : location.hash === '#skills' ? 'skills' : location.hash === '#about' ? 'about' : location.hash === '#contact' ? 'contact' : 'main')
-    sync()
-    addEventListener('hashchange', sync)
-    return () => removeEventListener('hashchange', sync)
+    let frame = 0
+    const update = () => {
+      frame = 0
+      if (location.hash.startsWith('#projects/')) { setActive('projects'); return }
+      const activationLine = (header.current?.getBoundingClientRect().bottom ?? 69) + 48
+      const sections = ['main', 'about', 'skills', 'projects', 'contact']
+      let current = 'main'
+      for (const id of sections) {
+        const section = document.getElementById(id)
+        if (section && section.getBoundingClientRect().top <= activationLine) current = id
+      }
+      setActive(current)
+    }
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update) }
+    schedule()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    window.addEventListener('hashchange', schedule)
+    const observer = new ResizeObserver(schedule)
+    const main = document.getElementById('main')
+    if (main) observer.observe(main)
+    if (header.current) observer.observe(header.current)
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      window.removeEventListener('hashchange', schedule)
+    }
   }, [])
 
   useEffect(() => {
-    if (open) firstLink.current?.focus()
+    if (open) firstLink.current?.focus({ preventScroll: true })
   }, [open])
 
   useEffect(() => {

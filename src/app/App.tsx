@@ -12,7 +12,6 @@ import { messages, type Locale } from '../i18n/messages'
 
 export function App() {
   const [experience, setExperience] = useState<'workspace' | 'terminal' | null>(null)
-  const [messageDraft, setMessageDraft] = useState<{ message: string } | undefined>(undefined)
   const [locale, setLocale] = useState<Locale>('es')
   const [hash, setHash] = useState(() => typeof window === 'undefined' ? '' : window.location.hash)
   const project = projectFromHash(hash)
@@ -23,9 +22,9 @@ export function App() {
     return () => window.removeEventListener('hashchange', sync)
   }, [])
   useEffect(() => {
-    const target = hash === '#contact' && messageDraft ? document.getElementById('contact-message') : project ? document.getElementById('case-title') : document.getElementById(hash.slice(1))
+    const target = project ? document.getElementById('case-title') : document.getElementById(hash.slice(1))
     if (target) { target.focus({ preventScroll: true }); target.scrollIntoView({ block: 'start' }) }
-  }, [hash, project, messageDraft])
+  }, [hash, project])
   useEffect(() => {
     document.documentElement.lang = locale
     document.title = project ? `${project.name} — DNNNAH` : `DNNNAH — ${t.title}`
@@ -37,14 +36,13 @@ export function App() {
     <a className="skip-link" href="#main">{t.skip}</a>
     <div className="page">
       <Navbar locale={locale} onLocaleChange={setLocale} onWorkspaceOpen={() => setExperience('workspace')} onTerminalOpen={() => setExperience('terminal')} />
-      <main id="main" tabIndex={-1}>{project ? <ProjectCase project={project} locale={locale} /> : <><Hero key={locale} locale={locale} /><About locale={locale} /><Skills locale={locale} /><Projects locale={locale} /><Contact locale={locale} messageDraft={messageDraft} /></>}</main>
+      <main id="main" tabIndex={-1}>{project ? <ProjectCase project={project} locale={locale} /> : <><Hero key={locale} locale={locale} /><About locale={locale} /><Skills locale={locale} /><Projects locale={locale} /><Contact locale={locale} /></>}</main>
     </div>
-    {experience && <Experience locale={locale} onLocaleChange={setLocale} onClose={() => setExperience(null)} onNavigate={(href, message?: string) => {
-      setMessageDraft(message === undefined ? undefined : { message })
+    {experience && <Experience locale={locale} onLocaleChange={setLocale} onClose={() => setExperience(null)} onNavigate={href => {
       setExperience(null)
       if (window.location.hash !== href) window.location.hash = href
       else requestAnimationFrame(() => {
-        const target = document.getElementById(message === undefined ? (projectFromHash(href) ? 'case-title' : href.slice(1)) : 'contact-message')
+        const target = document.getElementById(projectFromHash(href) ? 'case-title' : href.slice(1))
         target?.focus({ preventScroll: true })
         target?.scrollIntoView({ block: 'start' })
       })

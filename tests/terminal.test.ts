@@ -51,17 +51,30 @@ test('amplía el sistema de archivos virtual y Git sin efectos reales', () => {
   expect(executeCommand('cv', 'es').links).toBeUndefined()
 })
 
-test('contact prepara un borrador literal sin enviar y conserva sus espacios', () => {
-  expect(executeCommand('contact', 'es').navigate).toBe('#contact')
-  expect(executeCommand('contact --msg', 'es')).toMatchObject({ navigate: '#contact', message: '' })
-  expect(executeCommand('contact --msg "Hola,  Donnovan"', 'es')).toMatchObject({ navigate: '#contact', message: 'Hola,  Donnovan' })
-  expect(executeCommand("contact --msg 'Hola mundo'", 'en').message).toBe('Hola mundo')
-  expect(executeCommand('contact --msg <script>alert(1)</script>', 'es').message).toBe('<script>alert(1)</script>')
-  expect(executeCommand('contact --msg "sin cerrar', 'es').navigate).toBeUndefined()
-  expect(executeCommand('contact --other', 'es').navigate).toBeUndefined()
-  expect(completeCommand('git st')).toEqual(['git status'])
-  expect(completeCommand('ls -')).toEqual(['ls -la'])
+test('contact muestra canales reales sin navegar y --msg devuelve el fallo solicitado', () => {
+  for (const locale of ['es', 'en'] as const) {
+    const contact = executeCommand('contact', locale)
+    expect(contact.navigate).toBeUndefined()
+    expect(contact.links).toEqual([
+      { label: 'dnnnah@icloud.com', href: 'mailto:dnnnah@icloud.com' },
+      { label: 'LinkedIn / donnovan-tc', href: 'https://www.linkedin.com/in/donnovan-tc/' },
+      { label: 'GitHub / dnnnah', href: 'https://github.com/dnnnah' },
+    ])
+    for (const input of ['contact --msg', 'contact --msg "Hola, Donnovan"', 'contact --msg <script>alert(1)</script>']) {
+      const result = executeCommand(input, locale)
+      expect(result.text).toBe('503 — dispatch failed. try the form at contact')
+      expect(result.navigate).toBeUndefined()
+      expect(result).not.toHaveProperty('message')
+    }
+  }
   expect(completeCommand('contact --')).toEqual(['contact --msg'])
+  expect(executeCommand('contact --other', 'es').navigate).toBeUndefined()
+})
+
+test('git log --oneline muestra commits documentados y se autocompleta', () => {
+  expect(executeCommand('git log --oneline', 'es').text).toContain('83898c7 fix(navbar): muestra el atajo de Terminal sin icono')
+  expect(executeCommand('git log --oneline', 'en').text).toContain('3b6a199 feat(terminal): implementa consola interactiva v0.2 bilingüe')
+  expect(completeCommand('git log')).toEqual(['git log --oneline'])
 })
 
 test('el atajo corresponde al sistema operativo, no al motor WebKit', async () => {

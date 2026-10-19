@@ -2,10 +2,11 @@ import { messages, type Locale } from '../../i18n/messages'
 import { aboutCopy } from '../about/content'
 import { technologies } from '../skills/content'
 import { projects } from '../projects/content'
+import { contactLinks } from '../contact/links'
 import { sectionFiles } from '../workspace/files'
 
-export type CommandResult = { text: string; links?: { label: string; href: string }[]; navigate?: string; action?: 'clear' | 'exit' | 'matrix' }
-export const commands = ['help', 'ls', 'cat <archivo>', 'open <sección>', 'skills', 'stack', 'projects', 'whoami', 'hire', 'git blame', 'curl cheat-sheet', 'sudo make-coffee', 'sudo rm -rf /', 'matrix', 'clear', 'exit']
+export type CommandResult = { text: string; links?: { label: string; href: string }[]; navigate?: string; message?: string; action?: 'clear' | 'exit' | 'matrix' }
+export const commands = ['help', 'ls', 'ls -la', 'pwd', 'cat <archivo>', 'open <sección>', 'skills', 'stack', 'projects', 'whoami', 'hire', 'contact', 'contact --msg', 'cv', 'git status', 'git blame', 'easter', 'curl cheat-sheet', 'sudo make-coffee', 'sudo rm -rf /', 'matrix', 'clear', 'exit']
 const routes: Record<string, string> = Object.fromEntries(sectionFiles.flatMap(file => [[file.id, file.href], [file.name, file.href]]))
 const projectLinks = () => projects.map(project => ({ label: project.name, href: `#projects/${project.slug}` }))
 export function completeCommand(input: string): string[] {
@@ -15,7 +16,8 @@ export function completeCommand(input: string): string[] {
 }
 // Closed vocabulary: input is compared as text, never evaluated or sent to a shell/network.
 export function executeCommand(input: string, locale: Locale): CommandResult {
-  const value = input.trim().replace(/\s+/g, ' ')
+  const raw = input.trim()
+  const value = raw.replace(/\s+/g, ' ')
   const es = locale === 'es'
   const t = messages[locale]
   const about = aboutCopy[locale]
@@ -24,6 +26,25 @@ export function executeCommand(input: string, locale: Locale): CommandResult {
   const identity = `${t.greeting} ${t.name}\n${t.description}`
   const help = commands.map(command => command.replace('<archivo>', es ? '<archivo>' : '<file>').replace('<sección>', es ? '<sección>' : '<section>')).join('\n')
   if (value === 'help' || value === 'curl cheat-sheet') return { text: `${help}\n\n${es ? '↑/↓ historial · Tab completar · Shift+Tab cambiar foco · Escape salir' : '↑/↓ history · Tab complete · Shift+Tab move focus · Escape exit'}` }
+  if (value === 'pwd') return { text: '/home/visitor/dnnnah/portfolio' }
+  if (value === 'ls -la') return { text: [es ? 'Sistema de archivos virtual · permisos ilustrativos' : 'Virtual filesystem · illustrative permissions', 'drwxr-xr-x visitor dnnnah .', 'drwxr-xr-x visitor dnnnah ..', ...sectionFiles.map(file => `${file.kind === 'folder' ? 'drwxr-xr-x' : '-rw-r--r--'} visitor dnnnah ${file.name}`)].join('\n') }
+  if (value === 'cv') {
+    const href = contactLinks.cv.trim()
+    return href ? { text: es ? 'Currículum de Donnovan.' : 'Donnovan’s résumé.', links: [{ label: es ? 'Ver CV' : 'View résumé', href }] } : { text: es ? 'El CV todavía no está disponible. Puedes usar contact para conversar conmigo.' : 'The résumé is not available yet. Use contact to get in touch.' }
+  }
+  if (value === 'contact') return { text: es ? 'Abriendo Contact.' : 'Opening Contact.', navigate: '#contact' }
+  const messageMatch = raw.match(/^contact\s+--msg(?:\s+([\s\S]*))?$/)
+  if (messageMatch) {
+    let message = messageMatch[1] ?? ''
+    if (message.startsWith('"') || message.startsWith("'")) {
+      if (message.length < 2 || message.at(-1) !== message[0]) return { text: es ? 'Cierra las comillas. Ejemplo: contact --msg "Hola Donnovan"' : 'Close the quotation marks. Example: contact --msg "Hello Donnovan"' }
+      message = message.slice(1, -1)
+    }
+    if (message.length > 4000) return { text: es ? 'El mensaje supera los 4000 caracteres.' : 'The message exceeds 4000 characters.' }
+    return { text: es ? 'Preparando borrador en Contact. Revisa el formulario antes de enviar.' : 'Preparing a draft in Contact. Review the form before sending.', navigate: '#contact', message }
+  }
+  if (value === 'git status' || value === 'git stattus') return { text: es ? 'En la rama main\nNada para hacer commit, árbol de trabajo limpio.\n\nSimulación del portfolio; no consulta tu repositorio.' : 'On branch main\nNothing to commit, working tree clean.\n\nPortfolio simulation; does not inspect your repository.' }
+  if (value === 'easter') return { text: es ? 'Pequeños desvíos: \n  sudo make-coffee  — café imaginario\n  matrix            — sigue al conejo blanco\n  sudo rm -rf /     — el sentido común tiene permisos de administrador' : 'Small detours: \n  sudo make-coffee  — imaginary coffee\n  matrix            — follow the white rabbit\n  sudo rm -rf /     — common sense has administrator privileges' }
   if (value === 'ls') return { text: sectionFiles.map(file => file.name).join('  ') }
   if (value === 'whoami') return { text: identity }
   if (value === 'skills' || value === 'stack') return { text: skills }
@@ -42,7 +63,7 @@ export function executeCommand(input: string, locale: Locale): CommandResult {
     const href = Object.hasOwn(routes, value.slice(5)) ? routes[value.slice(5)] : undefined
     return href ? { text: es ? 'Abriendo sección…' : 'Opening section…', navigate: href } : { text: es ? 'Sección desconocida. Consulta help o ls.' : 'Unknown section. See help or ls.' }
   }
-  if (value === 'git blame') return { text: es ? 'La culpa es del último punto y coma. La responsabilidad del resultado es mía.' : 'Blame the last semicolon. I still own the result.' }
+  if (value === 'git blame') return { text: `${es ? 'Simulación de git blame · hero.tsx · líneas ilustrativas' : 'Simulated git blame · hero.tsx · illustrative lines'}\n\n00000000 (Donnovan 1) const name = "Donnovan";\n00000000 (Donnovan 2) const portfolio = {\n00000000 (Donnovan 3)   intent: "${t.principle}",\n00000000 (Donnovan 4) };` }
   if (value === 'sudo make-coffee') return { text: es ? 'Preparando café imaginario… listo. Dependencia humana satisfecha.' : 'Brewing imaginary coffee… ready. Human dependency satisfied.' }
   if (value === 'sudo rm -rf /') return { text: es ? 'El universo contiene la respiración… Operación cancelada por el sentido común. Simulación: no se ha eliminado nada.' : 'The universe holds its breath… Common sense cancelled the operation. Simulation: nothing was deleted.' }
   if (value === 'matrix') return { text: es ? 'Sigue al conejo blanco. Regresamos en 3 segundos.' : 'Follow the white rabbit. Back in 3 seconds.', action: 'matrix' }

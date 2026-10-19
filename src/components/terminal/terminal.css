@@ -18,7 +18,8 @@
 .term-welcome { margin-bottom: 32px; }
 .term-welcome p { font-size: 14px; max-width: 72ch; }
 .term-welcome .term-wordmark { color: #B8FF65; font-size: clamp(32px, 6vw, 58px); font-weight: 700; letter-spacing: -.04em; line-height: 1.3; margin-bottom: 16px; }
-.term-wordmark span { color: #D9CDFF; }
+.term-wordmark span { color: #D9CDFF; animation: term-blink 1.1s step-end infinite; }
+@keyframes term-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 .term-welcome #term-description { margin-top: 12px; color: #d0d0d0; }
 .term-welcome .term-simulation { margin-top: 12px; font-size: 12px; color: #bdbdbd; }
 .term-entry + .term-entry { margin-top: 24px; }
@@ -29,10 +30,12 @@
 .term-links a { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; color: #B8FF65; text-decoration: underline; }
 .term-links a:hover { color: #D9CDFF; }
 .term-input-area { padding: 8px 24px 16px; flex-shrink: 0; border-top: 1px solid #444; }
-.term-input-area form { display: flex; align-items: center; gap: 12px; }
+.term-input-area form { display: flex; align-items: center; gap: 8px; border: 1px solid #555; border-radius: 4px; padding-inline: 8px; }
+.term-input-area form:focus-within { border-color: #D9CDFF; }
+.term-input-area input:focus-visible { outline: none; }
 .term-input-area label { display: flex; align-items: center; gap: 16px; color: #B8FF65; font-size: 14px; }
 .term-user > span { color: #D9CDFF; }
-.term-input-area input { width: 0; min-width: 0; flex: 1; min-height: 48px; border: 0; background: transparent; font: 14px var(--font-mono); color: #f6f5f0; caret-color: #B8FF65; }
+.term-input-area input { width: 0; min-width: 0; flex: 1; min-height: 48px; padding: 8px; border: 0; background: transparent; font: 14px var(--font-mono); color: #f6f5f0; caret-color: #D9CDFF; }
 .term-input-area > p { font-size: 11px; color: #bdbdbd; margin-top: 8px; }
 .term-suggestions { font-size: 12px; color: #D9CDFF; overflow-wrap: anywhere; max-height: 90px; overflow-y: auto; }
 .term-suggestions:not(:empty) { padding-block: 8px; }
@@ -57,4 +60,4 @@
   .term-input-area input { font-size: 16px; }
   .term-footer { font-size: 10px; }
 }
-@media (prefers-reduced-motion: reduce) { .term-matrix span { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .term-matrix span, .term-wordmark span { animation: none; } }

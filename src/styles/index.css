@@ -153,3 +153,10 @@ html { scroll-padding-top: calc(var(--navbar-height) + 1rem); }
 .hero-filebar, .about-filebar > :first-child, .contact-index > :first-child { display: flex; align-items: center; gap: .75rem; }
 .hero-filebar { margin-bottom: 2rem; font: .75rem var(--font-mono); }
 .hero-filebar svg, .about-filebar > :first-child svg, .contact-index > :first-child svg { flex-shrink: 0; }
+
+.masthead { grid-template-columns: minmax(0, 1fr) auto auto auto; }
+.terminal-shortcut { display: inline-flex; align-items: center; gap: 8px; min-width: 44px; min-height: 44px; padding: 8px 12px; border: 1px solid #aaa99f; background: transparent; color: var(--color-ink); }
+.terminal-shortcut:hover { background: var(--color-lavender); }
+.terminal-shortcut kbd { font: 12px var(--font-mono); white-space: nowrap; }
+@media (max-width: 400px) { .terminal-shortcut { gap: 4px; padding-inline: 6px; } .masthead { column-gap: 8px; } .language { gap: 0; } }
+@media (max-width: 35rem) { .masthead .wordmark { font-size: 0; gap: 0; } .terminal-shortcut > svg { display: none; } }

@@ -8,7 +8,7 @@ test('ofrece los destinos existentes y ambos modos sin enlaces rotos', () => {
   expect(html).toContain('href="#about"')
   expect(html).toContain('href="#skills"')
   expect(html).toContain('aria-current="page"')
-  expect(html.match(/aria-haspopup="dialog"/g)).toHaveLength(2)
+  expect(html.match(/aria-haspopup="dialog"/g)).toHaveLength(3)
   expect(html).toContain('href="#projects"')
   expect(html).toContain('href="#contact"')
   expect(html).not.toContain('Pendiente')

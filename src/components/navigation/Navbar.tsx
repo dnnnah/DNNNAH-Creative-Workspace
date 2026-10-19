@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X, FileCode2, FileText, Braces, Folder, PanelTop, PanelsTopLeft, Terminal } from 'lucide-react'
+import { isApplePlatform } from './shortcut'
 import type { Locale } from '../../i18n/messages'
 
 const destinations = [
@@ -17,7 +18,21 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen
   const header = useRef<HTMLElement>(null)
   const firstLink = useRef<HTMLAnchorElement>(null)
   const es = locale === 'es'
+  const [apple] = useState(() => typeof navigator !== 'undefined' && isApplePlatform(navigator.platform || navigator.userAgent))
+  const shortcut = apple ? 'CMD+K' : 'Ctrl+K'
   const close = () => { setOpen(false); toggle.current?.focus() }
+
+  useEffect(() => {
+    const launch = (event: globalThis.KeyboardEvent) => {
+      const modifier = apple ? event.metaKey && !event.ctrlKey : event.ctrlKey && !event.metaKey
+      if (event.key.toLowerCase() !== 'k' || !modifier || event.shiftKey || event.altKey || event.repeat || event.isComposing) return
+      event.preventDefault()
+      setOpen(false)
+      onTerminalOpen?.()
+    }
+    window.addEventListener('keydown', launch)
+    return () => window.removeEventListener('keydown', launch)
+  }, [apple, onTerminalOpen])
 
   useEffect(() => {
     const sync = () => setActive(location.hash.startsWith('#projects') ? 'projects' : location.hash === '#skills' ? 'skills' : location.hash === '#about' ? 'about' : location.hash === '#contact' ? 'contact' : 'main')
@@ -48,6 +63,10 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen
     <div className="language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
       {(['es', 'en'] as const).map(language => <button key={language} type="button" lang={language} aria-label={language === 'es' ? 'Español' : 'English'} aria-pressed={locale === language} onClick={() => onLocaleChange(language)}>{language.toUpperCase()}</button>)}
     </div>
+    <button className="terminal-shortcut" type="button" aria-label={`${es ? 'Abrir Terminal' : 'Open Terminal'} (${shortcut})`} aria-keyshortcuts={apple ? 'Meta+K' : 'Control+K'} aria-haspopup="dialog" onClick={() => {
+      setOpen(false)
+      onTerminalOpen?.()
+    }}><Terminal size={18} aria-hidden="true" /><kbd>{shortcut}</kbd></button>
     <button ref={toggle} className="menu-toggle" type="button" aria-label={es ? (open ? 'Cerrar menú' : 'Abrir menú') : (open ? 'Close menu' : 'Open menu')} aria-expanded={open} aria-controls="primary-navigation" onClick={() => open ? close() : setOpen(true)}>
       {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
     </button>

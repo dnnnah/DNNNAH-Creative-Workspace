@@ -5,7 +5,7 @@ import type { Locale } from '../../i18n/messages'
 import { completeCommand, executeCommand } from './commands'
 import './terminal.css'
 
-type Props = { locale: Locale; onLocaleChange: (locale: Locale) => void; onClose: () => void; onNavigate: (href: string) => void }
+type Props = { locale: Locale; onLocaleChange: (locale: Locale) => void; onClose: () => void; onNavigate: (href: string, message?: string) => void }
 export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props) {
   const es = locale === 'es'
   const modal = useRef<HTMLDialogElement>(null)
@@ -46,7 +46,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
     setValue('')
     setSuggestions([])
     if (result.action === 'exit') { onClose(); return }
-    if (result.navigate) { onNavigate(result.navigate); return }
+    if (result.navigate) { onNavigate(result.navigate, result.message); return }
     setEntries(current => result.action === 'clear' ? [] : [...current.slice(-199), command])
     if (result.action === 'matrix') {
       setMatrix(true)
@@ -93,7 +93,8 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
         const result = executeCommand(command, locale)
         return <div className="term-entry" key={`${index}-${command}`}><p className="term-command"><span aria-hidden="true">❯</span> {command}</p><div className="term-output">{result.text}</div>{result.links && <ul className="term-links">{result.links.map(link => <li key={link.href}><a href={link.href} onClick={event => {
           if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
-          event.preventDefault(); onNavigate(link.href)
+          if (link.href.startsWith('#')) { event.preventDefault(); onNavigate(link.href) }
+          else onClose()
         }}>{link.label}<ArrowRight size={16} aria-hidden="true" /></a></li>)}</ul>}</div>
       })}</div>
       <div ref={bottom} />

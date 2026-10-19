@@ -7,9 +7,14 @@ import { Turnstile } from './Turnstile'
 import { contactLinks } from './links'
 import './contact.css'
 const empty: ContactData = { name: '', email: '', subject: '', message: '' }
-export function Contact({ locale }: { locale: Locale }) {
+export function Contact({ locale, messageDraft }: { locale: Locale; messageDraft?: { message: string } }) {
  const es = locale === 'es'
- const [data, setData] = useState(empty)
+ const [data, setData] = useState(() => ({ ...empty, message: messageDraft?.message ?? '' }))
+ const [previousDraft, setPreviousDraft] = useState(messageDraft)
+ if (messageDraft !== previousDraft) {
+  setPreviousDraft(messageDraft)
+  if (messageDraft?.message) setData(current => ({ ...current, message: current.message ? `${current.message}\n\n${messageDraft.message}` : messageDraft.message }))
+ }
  const [errors, setErrors] = useState<Errors>({})
  const [token, setToken] = useState('')
  const [attempt, setAttempt] = useState(0)

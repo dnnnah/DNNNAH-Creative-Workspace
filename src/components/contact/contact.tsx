@@ -45,7 +45,7 @@ export function Contact({ locale }: { locale: Locale }) {
      <p className="contact-description">{es ? 'Cuéntame qué tienes en mente. Una idea, un reto o ese detalle que todavía no encaja.' : 'Tell me what you have in mind. An idea, a challenge, or that detail that has yet to click.'}</p>
      <div className="contact-resources" role="group" aria-labelledby="contact-resources-title">
       <h3 id="contact-resources-title">{es ? 'Perfil y trayectoria' : 'Profile and experience'}</h3>
-      <a className="contact-resource" href="https://github.com/dnnnah"><span>GitHub / dnnnah</span><span aria-hidden="true">↗</span></a>
+      <a className="contact-resource" href={contactLinks.github}><span>GitHub / dnnnah</span><span aria-hidden="true">↗</span></a>
       {([{ label: es ? 'Ver CV' : 'View résumé', href: contactLinks.cv }, { label: 'LinkedIn', href: contactLinks.linkedin }]).map(({ label, href }) => href.trim()
        ? <a key={label} className="contact-resource" href={href.trim()}><span>{label}</span><span aria-hidden="true">↗</span></a>
        : <span key={label} className="contact-resource contact-resource--pending" aria-disabled="true"><span>{label}</span><span className="contact-resource-status">{es ? 'Próximamente' : 'Coming soon'}</span></span>)}

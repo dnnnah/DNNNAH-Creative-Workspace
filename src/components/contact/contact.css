@@ -41,5 +41,5 @@
 .contact-footer-brand span, .contact-footer p { font: .6875rem var(--font-mono); }
 .contact-footer nav { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
 .contact-footer nav a { display: inline-flex; align-items: center; min-height: 44px; font: .75rem var(--font-mono); }
-@media(max-width: 55rem) { .contact-layout { grid-template-columns: 1fr; } .contact-intro h2 { max-width: 13ch; font-size: clamp(2.75rem, 9vw, 5rem); } .contact-signature { margin-top: 2rem; } .contact-editor { max-width: 42rem; width: 100%; } }
+@media(max-width: 55rem) { .contact-layout { grid-template-columns: 1fr; } .contact-intro h2 { max-width: 13ch; font-size: clamp(2.75rem, 9vw, 5rem); } .contact-signature { margin-top: 2rem; } .contact-editor { width: 100%; } }
 @media(max-width: 25rem) { .contact-field { grid-template-columns: 1rem minmax(0, 1fr); gap: .375rem; } .contact-editor { box-shadow: 4px 4px 0 var(--color-lavender); } }

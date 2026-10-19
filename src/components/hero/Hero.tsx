@@ -44,7 +44,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <p>{t.description}</p>
         <div className="hero-actions">
           <a className="button" href="https://github.com/dnnnah">{t.github}<Arrow /></a>
-          <a className="button source-link" href="https://github.com/dnnnah/DNNNAH-Creative-Workspace">{t.source}<Arrow /></a>
+          <a className="button source-link" href="#projects">{t.source}<Arrow /></a>
         </div>
       </div>
     </div>

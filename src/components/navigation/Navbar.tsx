@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X, FileCode2, FileText, Braces, Folder, PanelTop, PanelsTopLeft, Terminal } from 'lucide-react'
+import { isApplePlatform } from './shortcut'
 import type { Locale } from '../../i18n/messages'
 
 const destinations = [
@@ -10,24 +11,63 @@ const destinations = [
   { label: 'contact.tsx', icon: PanelTop },
 ] as const
 
-export function Navbar({ locale, onLocaleChange, onWorkspaceOpen }: { locale: Locale; onLocaleChange: (locale: Locale) => void; onWorkspaceOpen?: () => void }) {
+export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen }: { locale: Locale; onLocaleChange: (locale: Locale) => void; onWorkspaceOpen?: () => void; onTerminalOpen?: () => void }) {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('main')
   const toggle = useRef<HTMLButtonElement>(null)
   const header = useRef<HTMLElement>(null)
   const firstLink = useRef<HTMLAnchorElement>(null)
   const es = locale === 'es'
+  const [apple] = useState(() => typeof navigator !== 'undefined' && isApplePlatform(navigator.platform || navigator.userAgent))
+  const shortcut = apple ? 'CMD+K' : 'Ctrl+K'
   const close = () => { setOpen(false); toggle.current?.focus() }
 
   useEffect(() => {
-    const sync = () => setActive(location.hash.startsWith('#projects') ? 'projects' : location.hash === '#skills' ? 'skills' : location.hash === '#about' ? 'about' : location.hash === '#contact' ? 'contact' : 'main')
-    sync()
-    addEventListener('hashchange', sync)
-    return () => removeEventListener('hashchange', sync)
+    const launch = (event: globalThis.KeyboardEvent) => {
+      const modifier = apple ? event.metaKey && !event.ctrlKey : event.ctrlKey && !event.metaKey
+      if (event.key.toLowerCase() !== 'k' || !modifier || event.shiftKey || event.altKey || event.repeat || event.isComposing) return
+      event.preventDefault()
+      setOpen(false)
+      onTerminalOpen?.()
+    }
+    window.addEventListener('keydown', launch)
+    return () => window.removeEventListener('keydown', launch)
+  }, [apple, onTerminalOpen])
+
+  useEffect(() => {
+    let frame = 0
+    const update = () => {
+      frame = 0
+      if (location.hash.startsWith('#projects/')) { setActive('projects'); return }
+      const activationLine = (header.current?.getBoundingClientRect().bottom ?? 69) + 48
+      const sections = ['main', 'about', 'skills', 'projects', 'contact']
+      let current = 'main'
+      for (const id of sections) {
+        const section = document.getElementById(id)
+        if (section && section.getBoundingClientRect().top <= activationLine) current = id
+      }
+      setActive(current)
+    }
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update) }
+    schedule()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    window.addEventListener('hashchange', schedule)
+    const observer = new ResizeObserver(schedule)
+    const main = document.getElementById('main')
+    if (main) observer.observe(main)
+    if (header.current) observer.observe(header.current)
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      window.removeEventListener('hashchange', schedule)
+    }
   }, [])
 
   useEffect(() => {
-    if (open) firstLink.current?.focus()
+    if (open) firstLink.current?.focus({ preventScroll: true })
   }, [open])
 
   useEffect(() => {
@@ -48,6 +88,10 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen }: { locale: Lo
     <div className="language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
       {(['es', 'en'] as const).map(language => <button key={language} type="button" lang={language} aria-label={language === 'es' ? 'Español' : 'English'} aria-pressed={locale === language} onClick={() => onLocaleChange(language)}>{language.toUpperCase()}</button>)}
     </div>
+    <button className="terminal-shortcut" type="button" aria-label={`${es ? 'Abrir Terminal' : 'Open Terminal'} (${shortcut})`} aria-keyshortcuts={apple ? 'Meta+K' : 'Control+K'} aria-haspopup="dialog" onClick={() => {
+      setOpen(false)
+      onTerminalOpen?.()
+    }}><kbd>{shortcut}</kbd></button>
     <button ref={toggle} className="menu-toggle" type="button" aria-label={es ? (open ? 'Cerrar menú' : 'Abrir menú') : (open ? 'Close menu' : 'Open menu')} aria-expanded={open} aria-controls="primary-navigation" onClick={() => open ? close() : setOpen(true)}>
       {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
     </button>
@@ -67,7 +111,11 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen }: { locale: Lo
           toggle.current?.focus()
           onWorkspaceOpen?.()
         }}><PanelsTopLeft size={18} aria-hidden="true" /><span>Workspace</span></button>
-        <span className="file-link file-link--pending" aria-disabled="true"><Terminal size={18} aria-hidden="true" /><span>Terminal</span><span className="pending-status">{es ? 'Pendiente' : 'Pending'}</span></span>
+        <button className="file-link workspace-launch" type="button" aria-haspopup="dialog" onClick={() => {
+          setOpen(false)
+          toggle.current?.focus()
+          onTerminalOpen?.()
+        }}><Terminal size={18} aria-hidden="true" /><span>Terminal</span></button>
       </div>
     </nav>
 

@@ -12,6 +12,10 @@
 .ink-reset { position: fixed; bottom: 1rem; right: 1rem; z-index: 36; min-height: 44px; padding: .625rem 1rem; border: 1px solid var(--color-ink); color: var(--color-ink); background: var(--color-lime); }
 .secret-code { max-width: 100%; overflow-x: auto; padding: 1rem; background: var(--color-lavender); color: var(--color-ink); font: .875rem/1.8 var(--font-mono); }
 @media (max-width: 35rem) { .brand-group .wordmark { display: none; } .brand-group { gap: 0; } .sound-toggle { gap: .2rem; padding-inline: .25rem; } }
+@media (max-width: 25rem) {
+ .playground .masthead { grid-template-columns: minmax(44px, 1fr) auto auto auto auto; column-gap: 0; padding-inline: 0; }
+ .sound-toggle span { display: none; }
+}
 @media (hover: hover) {
  .brand-egg:hover { transform: rotate(-6deg); }
  .sound-toggle:hover, .ws-link:hover, .ink-reset:hover { background: var(--color-lavender); }

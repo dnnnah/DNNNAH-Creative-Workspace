@@ -4,6 +4,7 @@ import type { KeyboardEvent } from 'react'
 import type { Locale } from '../../i18n/messages'
 import { completeCommand, executeCommand } from './commands'
 import './terminal.css'
+import { Demolition } from './Demolition'
 
 type Props = { locale: Locale; onLocaleChange: (locale: Locale) => void; onClose: () => void; onNavigate: (href: string) => void }
 export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props) {
@@ -18,6 +19,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
   const [position, setPosition] = useState<number | null>(null)
   const draft = useRef('')
   const [suggestions, setSuggestions] = useState<string[]>([])
+  const [busy, setBusy] = useState(false)
   const [matrix, setMatrix] = useState(false)
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
 
   function submit() {
     const command = value.trim()
-    if (!command) return
+    if (!command || busy) return
     const result = executeCommand(command, locale)
     setHistory(current => [...current.slice(-199), command])
     setPosition(null)
@@ -48,6 +50,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
     if (result.action === 'exit') { onClose(); return }
     if (result.navigate) { onNavigate(result.navigate); return }
     setEntries(current => result.action === 'clear' ? [] : [...current.slice(-199), command])
+    if (result.action === 'demolition') setBusy(true)
     if (result.action === 'matrix') {
       setMatrix(true)
       clearTimeout(timer.current)
@@ -91,7 +94,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
       <div className="term-welcome"><p className="term-wordmark">DNNNAH<span>_</span></p><p>{es ? 'Otra forma de entrar en mi mundo.' : 'Another way into my world.'}</p><p id="term-description">{es ? 'Explora el portfolio con comandos. Escribe help para empezar.' : 'Explore the portfolio with commands. Type help to get started.'}</p><p className="term-simulation">{es ? 'Simulación interactiva · ningún comando opera sobre tu equipo.' : 'Interactive simulation · no command operates on your computer.'}</p></div>
       <div role="log" aria-label={es ? 'Historial de respuestas' : 'Response history'} aria-live="polite" aria-relevant="additions" className="term-log">{entries.map((command, index) => {
         const result = executeCommand(command, locale)
-        return <div className="term-entry" key={`${index}-${command}`}><p className="term-command"><span aria-hidden="true">❯</span> {command}</p><div className="term-output">{result.text}</div>{result.links && <ul className="term-links">{result.links.map(link => <li key={link.href}><a href={link.href} onClick={event => {
+        return <div className="term-entry" key={`${index}-${command}`}><p className="term-command"><span aria-hidden="true">❯</span> {command}</p><div className="term-output">{result.action === 'demolition' ? <Demolition locale={locale} onDone={() => { if (index === entries.length - 1) setBusy(false) }} /> : result.text}</div>{result.links && <ul className="term-links">{result.links.map(link => <li key={link.href}><a href={link.href} onClick={event => {
           if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return
           if (link.href.startsWith('#')) { event.preventDefault(); onNavigate(link.href) }
           else onClose()
@@ -99,7 +102,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
       })}</div>
       <div ref={bottom} />
     </div>
-    <div className="term-input-area"><div role="status" className="term-suggestions">{suggestions.join('  ·  ')}</div><form onSubmit={event => { event.preventDefault(); submit() }}><label htmlFor="term-input"><span className="term-user" aria-hidden="true">visitor<span>@dnnnah</span> ~</span><span className="sr-only">{es ? 'Comando' : 'Command'}</span><span aria-hidden="true">❯</span></label><input ref={input} id="term-input" autoComplete="off" autoCapitalize="none" spellCheck={false} maxLength={500} value={value} onChange={event => { setValue(event.target.value); setPosition(null); setSuggestions([]) }} onKeyDown={keyboard} aria-describedby="term-hints" /><button type="submit" aria-label={es ? 'Ejecutar comando' : 'Run command'}><ArrowRight size={20} aria-hidden="true" /></button></form><p id="term-hints">{es ? '↑↓ historial · Tab completar · Shift+Tab foco · Esc salir' : '↑↓ history · Tab complete · Shift+Tab focus · Esc exit'}</p></div>
+    <div className="term-input-area"><div role="status" className="term-suggestions">{suggestions.join('  ·  ')}</div><form onSubmit={event => { event.preventDefault(); submit() }}><label htmlFor="term-input"><span className="term-user" aria-hidden="true">visitor<span>@dnnnah</span> ~</span><span className="sr-only">{es ? 'Comando' : 'Command'}</span><span aria-hidden="true">❯</span></label><input ref={input} id="term-input" readOnly={busy} autoComplete="off" autoCapitalize="none" spellCheck={false} maxLength={500} value={value} onChange={event => { setValue(event.target.value); setPosition(null); setSuggestions([]) }} onKeyDown={keyboard} aria-describedby="term-hints" /><button type="submit" disabled={busy} aria-label={es ? 'Ejecutar comando' : 'Run command'}><ArrowRight size={20} aria-hidden="true" /></button></form><p id="term-hints">{es ? '↑↓ historial · Tab completar · Shift+Tab foco · Esc salir' : '↑↓ history · Tab complete · Shift+Tab focus · Esc exit'}</p></div>
     <footer className="term-footer"><span><span className="term-ready" aria-hidden="true" />{es ? 'Listo para explorar' : 'Ready to explore'}</span><span>{locale.toUpperCase()} / UTF-8</span></footer>
     {matrix && <div className="term-matrix" aria-hidden="true">{Array.from({ length: 16 }, (_, index) => <span key={index} style={{ animationDelay: `${index * -0.17}s` }}>01<br />ア<br />10<br />イ<br />01<br />ウ<br />10<br />エ<br />01<br />オ<br />10<br />カ</span>)}</div>}
   </dialog>

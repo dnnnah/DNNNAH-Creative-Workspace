@@ -7,6 +7,7 @@ import { About } from '../components/about/About'
 import { Skills } from '../components/skills/Skills'
 import { Projects, ProjectCase } from '../components/projects/Projects'
 import { projectFromHash } from '../components/projects/content'
+import { Playground } from '../components/playground/Playground'
 import { Hero } from '../components/hero/Hero'
 import { messages, type Locale } from '../i18n/messages'
 
@@ -32,7 +33,7 @@ export function App() {
 
   const Experience = experience === 'workspace' ? Workspace : Terminal
 
-  return <>
+  return <Playground locale={locale}>
     <a className="skip-link" href="#main">{t.skip}</a>
     <div className="page">
       <Navbar locale={locale} onLocaleChange={setLocale} onWorkspaceOpen={() => setExperience('workspace')} onTerminalOpen={() => setExperience('terminal')} />
@@ -47,5 +48,5 @@ export function App() {
         target?.scrollIntoView({ block: 'start' })
       })
     }} />}
-  </>
+  </Playground>
 }

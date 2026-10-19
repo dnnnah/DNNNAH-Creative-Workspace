@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Menu, X, FileCode2, FileText, Braces, Folder, PanelTop, PanelsTopLeft, Terminal } from 'lucide-react'
+import { Volume2, VolumeX, Menu, X, FileCode2, FileText, Braces, Folder, PanelTop, PanelsTopLeft, Terminal } from 'lucide-react'
+import { usePlayground } from '../playground/context'
 import { isApplePlatform } from './shortcut'
 import type { Locale } from '../../i18n/messages'
 
@@ -12,6 +13,8 @@ const destinations = [
 ] as const
 
 export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen }: { locale: Locale; onLocaleChange: (locale: Locale) => void; onWorkspaceOpen?: () => void; onTerminalOpen?: () => void }) {
+  const { sound, toggleSound, discover } = usePlayground()
+  const taps = useRef({ count: 0, time: 0 })
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('main')
   const toggle = useRef<HTMLButtonElement>(null)
@@ -84,7 +87,13 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen
   }} onBlur={event => {
     if (open && !event.currentTarget.contains(event.relatedTarget)) setOpen(false)
   }}>
-    <a className="wordmark" href="#main" aria-label={es ? 'DNNNAH — inicio' : 'DNNNAH — home'}><span className="brand-mark" aria-hidden="true">D.</span>DNNNAH</a>
+    <div className="brand-group"><button className="brand-egg brand-mark" type="button" aria-label={es ? 'Explorar el monograma D.' : 'Explore the D. monogram'} title={es ? 'Tres toques revelan un detalle' : 'Three taps reveal a detail'} onClick={() => {
+      const now = Date.now()
+      taps.current.count = now - taps.current.time < 1800 ? taps.current.count + 1 : 1
+      taps.current.time = now
+      if (taps.current.count === 3) { taps.current.count = 0; discover() }
+    }}>D.</button><a className="wordmark" href="#main" aria-label={es ? 'DNNNAH — inicio' : 'DNNNAH — home'}>DNNNAH</a></div>
+    <button className="sound-toggle" type="button" aria-label={es ? (sound ? 'Desactivar sonidos' : 'Activar sonidos') : (sound ? 'Disable sounds' : 'Enable sounds')} aria-pressed={sound} onClick={toggleSound}>{sound ? <Volume2 size={18} aria-hidden="true" /> : <VolumeX size={18} aria-hidden="true" />}<span>{sound ? 'ON' : 'OFF'}</span></button>
     <div className="language" role="group" aria-label={es ? 'Idioma' : 'Language'}>
       {(['es', 'en'] as const).map(language => <button key={language} type="button" lang={language} aria-label={language === 'es' ? 'Español' : 'English'} aria-pressed={locale === language} onClick={() => onLocaleChange(language)}>{language.toUpperCase()}</button>)}
     </div>

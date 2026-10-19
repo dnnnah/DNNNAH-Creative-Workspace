@@ -10,7 +10,7 @@ const destinations = [
   { label: 'contact.tsx', icon: PanelTop },
 ] as const
 
-export function Navbar({ locale, onLocaleChange, onWorkspaceOpen }: { locale: Locale; onLocaleChange: (locale: Locale) => void; onWorkspaceOpen?: () => void }) {
+export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen }: { locale: Locale; onLocaleChange: (locale: Locale) => void; onWorkspaceOpen?: () => void; onTerminalOpen?: () => void }) {
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('main')
   const toggle = useRef<HTMLButtonElement>(null)
@@ -67,7 +67,11 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen }: { locale: Lo
           toggle.current?.focus()
           onWorkspaceOpen?.()
         }}><PanelsTopLeft size={18} aria-hidden="true" /><span>Workspace</span></button>
-        <span className="file-link file-link--pending" aria-disabled="true"><Terminal size={18} aria-hidden="true" /><span>Terminal</span><span className="pending-status">{es ? 'Pendiente' : 'Pending'}</span></span>
+        <button className="file-link workspace-launch" type="button" aria-haspopup="dialog" onClick={() => {
+          setOpen(false)
+          toggle.current?.focus()
+          onTerminalOpen?.()
+        }}><Terminal size={18} aria-hidden="true" /><span>Terminal</span></button>
       </div>
     </nav>
 

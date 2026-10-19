@@ -95,6 +95,10 @@ try {
   for (const selector of ['.brand-egg', '.sound-toggle', '.menu-toggle', '.terminal-shortcut']) {
    const box = await page.locator(selector).boundingBox()
    assert.ok(box.width >= 44 && box.height >= 44, `${selector} touch size at ${width}`)
+   assert.equal(await page.locator(selector).evaluate(el => {
+    const box = el.getBoundingClientRect()
+    return el.contains(document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2))
+   }), true, `${selector} is not covered by another control at ${width}`)
   }
   if (width === 375) await page.screenshot({ path: `${captures}/mobile.png` })
   await openWorkspace()
@@ -104,8 +108,33 @@ try {
   await page.keyboard.press('Escape')
  }
  await page.emulateMedia({ reducedMotion: 'reduce' })
+ for (const width of [320, 375, 1440]) {
+  await page.setViewportSize({ width, height: 900 })
+  // Catch regressions that reintroduce movement on focus or hover under reduced motion.
+  const reducedMark = page.locator('.brand-egg')
+  await reducedMark.focus()
+  await reducedMark.hover()
+  assert.deepEqual(await reducedMark.evaluate(el => {
+   const style = getComputedStyle(el)
+   return { transform: style.transform, transition: style.transitionDuration, animation: style.animationName }
+  }), { transform: 'none', transition: '0s', animation: 'none' })
+  await openWorkspace()
+  assert.equal(await page.locator('dialog').evaluate(el => getComputedStyle(el).animationName), 'none')
+  await secret()
+  await page.waitForFunction(() => document.activeElement?.id === 'ws-tab-secret', null, { timeout: 3000 })
+  const reducedSwap = page.locator('#ws-panel-secret button[aria-pressed]')
+  await reducedSwap.focus()
+  await page.keyboard.press('Enter')
+  assert.equal(await reducedSwap.getAttribute('aria-pressed'), 'true', 'Palette works with keyboard and reduced motion')
+  await page.keyboard.press('Space')
+  assert.equal(await reducedSwap.getAttribute('aria-pressed'), 'false', 'Palette is reversible without leaving the file')
+  assert.equal(await reducedSwap.evaluate(el => el === document.activeElement), true)
+  await page.keyboard.press('Escape')
+  assert.equal(await page.locator('.menu-toggle').evaluate(el => el === document.activeElement), true, 'Escape restores focus to menu trigger')
+ }
+ await page.emulateMedia({ reducedMotion: 'no-preference' })
  await openWorkspace()
- assert.equal(await page.locator('dialog').evaluate(el => getComputedStyle(el).animationName), 'none')
+ assert.notEqual(await page.locator('dialog').evaluate(el => getComputedStyle(el).animationName), 'none', 'Overlay retains its short entry animation when motion is allowed')
  await page.keyboard.press('Escape')
  await page.goto(base)
  const blocked = await browser.newPage()

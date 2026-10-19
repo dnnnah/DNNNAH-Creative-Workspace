@@ -28,7 +28,7 @@ Sonidos: lógica existente conservada, apagados de forma predeterminada, opt-in 
 ## Verificación
 
 - `npm run check`: typecheck, lint sin advertencias, 45 pruebas / 11 archivos y build correctos.
-- `tests/browser/easter-eggs.mjs`: consola una vez, Konami/restauración/hojas intactas/menú cerrado/confeti, repetición responsive por ráfaga, help/easter/Git, rm completo/cancelado/prompt, fantasmas 1→6 y movimiento/pista/desvanecimiento, reduced-motion, touch y overflow móvil. Reloj de navegador instalado antes de cargar la app para acelerar los temporizadores reales, sin hooks de prueba en producción.
+- `tests/browser/easter-eggs.mjs`: consola una vez, Konami/restauración/hojas intactas/menú cerrado/confeti, repetición responsive por ráfaga, help/easter/Git, rm completo/cancelado/prompt y remate visible tras finalizar, fantasmas 1→6 y movimiento/pista/desvanecimiento, reduced-motion, touch y overflow móvil. Reloj de navegador instalado antes de cargar la app para acelerar los temporizadores reales, sin hooks de prueba en producción.
 - `tests/browser/playground.mjs`: secretos existentes, audio opt-in/mute/persistencia/sin autoplay, ES/EN, teclado/foco/Escape, almacenamiento bloqueado, audio no disponible, 44px y tamaños 320–1440.
 - `tests/browser/sound-feedback.mjs`: perfiles general/Terminal/Workspace, controles de secciones, silencio al escribir y scroll, mute.
 - `tests/browser/terminal.mjs`: vocabulario cerrado y sin peticiones, rutas, historial, Tab, foco, Matrix, reduced-motion, clear, ES/EN, overlays, formulario y responsive.

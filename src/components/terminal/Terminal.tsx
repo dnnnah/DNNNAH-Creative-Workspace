@@ -36,7 +36,7 @@ export function Terminal({ locale, onLocaleChange, onClose, onNavigate }: Props)
       if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true })
     }
   }, [])
-  useEffect(() => { bottom.current?.scrollIntoView({ block: 'nearest' }) }, [entries, suggestions, locale])
+  useEffect(() => { bottom.current?.scrollIntoView({ block: 'nearest' }) }, [entries, suggestions, locale, busy])
 
   function submit() {
     const command = value.trim()

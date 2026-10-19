@@ -1,6 +1,7 @@
-import { ArrowDownRight, ArrowLeft, ArrowUpRight, Folder, Code2 } from 'lucide-react'
+import { ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Folder, Code2 } from 'lucide-react'
 import type { Locale } from '../../i18n/messages'
 import { projects, type Project } from './content'
+import { ProtechCase } from './ProtechCase'
 import './projects.css'
 
 function ProjectLinks({ project, locale }: { project: Project; locale: Locale }) {
@@ -41,8 +42,12 @@ export function Projects({ locale }: { locale: Locale }) {
 }
 
 export function ProjectCase({ project, locale }: { project: Project; locale: Locale }) {
+  if (project.slug === 'protech') return <ProtechCase locale={locale} />
+
   const es = locale === 'es'
-  const next = projects[(projects.indexOf(project) + 1) % projects.length]
+  const projectIndex = projects.indexOf(project)
+  const previous = projects[(projectIndex - 1 + projects.length) % projects.length]
+  const next = projects[(projectIndex + 1) % projects.length]
   return <article className="project-case" aria-labelledby="case-title">
     <a className="case-back" href="#projects"><ArrowLeft size={18} aria-hidden="true" />{es ? 'Volver a proyectos' : 'Back to projects'}</a>
     <div className="case-intro"><h1 id="case-title" tabIndex={-1}>{project.name}</h1><p>{project.status[locale]}</p><p>{project.summary[locale]}</p><ProjectLinks project={project} locale={locale} /></div>
@@ -54,6 +59,15 @@ export function ProjectCase({ project, locale }: { project: Project; locale: Loc
     ].map(([title, body]) => <section key={title}><h2>{title}</h2><p>{body}</p></section>)}
       <section><h2>{es ? 'Tecnologías documentadas' : 'Documented technologies'}</h2>{project.tools.length ? <ul className="case-tools">{project.tools.map(tool => <li key={tool}>{tool}</li>)}</ul> : <p>{es ? 'Sin stack confirmado para este caso.' : 'No confirmed stack for this case study.'}</p>}</section>
     </div>
-    <a className="case-next" href={`#projects/${next.slug}`}><span>{es ? 'Siguiente caso' : 'Next case study'}</span><strong>{next.name}</strong><ArrowUpRight size={24} aria-hidden="true" /></a>
+    <nav className="case-navigation" aria-label={es ? 'Navegación entre casos' : 'Case study navigation'}>
+      <a className="case-navigation__link case-navigation__link--previous" href={`#projects/${previous.slug}`}>
+        <span className="case-navigation__direction"><ArrowLeft size={16} aria-hidden="true" />{es ? 'Caso anterior' : 'Previous case study'}</span>
+        <strong>{previous.name}</strong>
+      </a>
+      <a className="case-navigation__link case-navigation__link--next" href={`#projects/${next.slug}`}>
+        <span className="case-navigation__direction">{es ? 'Siguiente caso' : 'Next case study'}<ArrowRight size={16} aria-hidden="true" /></span>
+        <strong>{next.name}</strong>
+      </a>
+    </nav>
   </article>
 }

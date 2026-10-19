@@ -6,7 +6,7 @@
 2. Abre Menú → Workspace → secret.ts (en móvil, abre primero Archivos). El archivo tiene contenido propio ES/EN y no cambia la URL a un destino inexistente.
 3. En secret.ts, activa Intercambiar acentos / Swap accents. Lima y lavanda intercambian papeles. El mismo botón restaura la paleta; fuera de Workspace también existe un control para restaurarla. El cambio es de sesión y no se guarda al recargar.
 
-No se añadieron sorpresas adicionales. Los comandos lúdicos de Terminal y el sistema de audio se conservaron. Command Palette continúa pospuesta.
+Esta página documenta la revisión anterior. La fase completa posterior, sus nuevas sorpresas y validaciones se detallan en [easter-eggs.md](easter-eggs.md). Command Palette continúa pospuesta.
 
 ## Corrección de esta revisión
 

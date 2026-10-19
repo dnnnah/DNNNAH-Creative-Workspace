@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from 'react'
 import type { Locale } from '../../i18n/messages'
+import { EasterEggs } from './EasterEggs'
 import { PlaygroundContext } from './context'
 
 const soundKey = 'dnnnah:sound'
@@ -67,7 +68,7 @@ export function Playground({ locale, children }: { locale: Locale; children: Rea
     void play(profile)
   }
   return <PlaygroundContext value={{ sound, toggleSound, ink, toggleInk: () => { setInk(value => !value) }, discover }}>
-    <div onClickCapture={interaction} className={ink ? 'playground is-ink' : 'playground'}>{children}
+    <div onClickCapture={interaction} className={ink ? 'playground is-ink' : 'playground'}>{children}<EasterEggs locale={locale} />
       <div className="playground-status" role="status">{found && <p>{es ? 'D. — El detalle también juega. Hay una pista en secret.ts, dentro de Workspace.' : 'D. — Details can play, too. Find a clue in secret.ts inside Workspace.'}</p>}</div>
       {ink && <button className="ink-reset" onClick={() => setInk(false)}>{es ? 'Restaurar paleta' : 'Restore palette'}</button>}
     </div>

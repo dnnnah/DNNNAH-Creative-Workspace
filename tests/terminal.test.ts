@@ -21,7 +21,7 @@ test('navega solo hacia rutas existentes y nunca interpreta entrada arbitraria',
 test('cada comando original tiene comportamiento y las simulaciones no producen acciones', () => {
   for (const input of ['help', 'skills', 'stack', 'projects', 'whoami', 'git blame', 'curl cheat-sheet', 'sudo make-coffee', 'sudo rm -rf /', 'matrix', 'clear', 'exit']) expect(executeCommand(input, 'es').text).toBeTruthy()
   expect(executeCommand('stack', 'en')).toEqual(executeCommand('skills', 'en'))
-  expect(executeCommand('sudo rm -rf /', 'es')).toEqual({ text: 'El universo contiene la respiración… Operación cancelada por el sentido común. Simulación: no se ha eliminado nada.' })
+  expect(executeCommand('sudo rm -rf /', 'es')).toEqual({ action: 'demolition', text: 'El universo contiene la respiración… Operación cancelada por el sentido común. Simulación: no se ha eliminado nada.' })
   expect(executeCommand('matrix', 'es').action).toBe('matrix')
   expect(executeCommand('clear', 'es').action).toBe('clear')
   expect(executeCommand('exit', 'es').action).toBe('exit')

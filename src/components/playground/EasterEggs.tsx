@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { MousePointer2, X } from 'lucide-react'
 import type { Locale } from '../../i18n/messages'
+import { isRapidResize, type ResizeSample } from './gesture-detectors'
+import { useFastScroll } from './useFastScroll'
 import { ghostCount, ghostPersonalities, ghostPosition } from './ghost-cursors'
 let consolePrinted = false
 const konami = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a']
 export function EasterEggs({ locale }: { locale: Locale }) {
   const es = locale === 'es'
+  const { fastScroll, dismissFastScroll } = useFastScroll()
   const [broken, setBroken] = useState(false)
   const [confetti, setConfetti] = useState(false)
   const [responsive, setResponsive] = useState(false)
@@ -83,17 +86,17 @@ export function EasterEggs({ locale }: { locale: Locale }) {
     let quiet: ReturnType<typeof setTimeout>
     let dismiss: ReturnType<typeof setTimeout>
     let previousWidth = innerWidth
-    let changes: number[] = []
+    let changes: ResizeSample[] = []
     const resize = () => {
       const width = innerWidth
       const delta = Math.abs(width - previousWidth)
       previousWidth = width
       clearTimeout(quiet)
       quiet = setTimeout(() => { triggered = false; changes = [] }, 1800)
-      if (triggered || width < 768 || !matchMedia('(hover: hover) and (pointer: fine)').matches || delta < 8) return
+      if (triggered || width < 768 || !matchMedia('(hover: hover) and (pointer: fine)').matches || delta < 16) return
       const now = Date.now()
-      changes = [...changes.filter(time => now - time < 1600), now]
-      if (changes.length < 4) return
+      changes = [...changes.filter(sample => now - sample.time <= 3000), { time: now, width }]
+      if (!isRapidResize(changes)) return
       triggered = true
       clearTimeout(dismiss)
       dismiss = setTimeout(() => setResponsive(false), 6000)
@@ -104,7 +107,7 @@ export function EasterEggs({ locale }: { locale: Locale }) {
   }, [])
   return <>
     <div className="egg-status" role="status">{broken && <p>{es ? '¡Oh no, se cayó el stylesheet!' : 'Oh no, the stylesheet fell over!'}<br /><small>{es ? 'Vuelve en 3 segundos.' : 'Back in 3 seconds.'}</small></p>}</div>
-    {responsive && <aside className="responsive-toast"><p role="status">{es ? '¿Probando el responsive? Yo también muevo la ventana así. Todo encaja.' : 'Testing responsive? I resize like that too. Everything fits.'}</p><button type="button" onClick={() => setResponsive(false)} aria-label={es ? 'Cerrar aviso responsive' : 'Dismiss responsive notice'}><X size={18} aria-hidden="true" /></button></aside>}
+    {(responsive || fastScroll) && <aside className="responsive-toast"><p role="status">{fastScroll ? (es ? '¿Buscando el final o probando la velocidad de la luz?' : 'Looking for the end or testing the speed of light?') : es ? '¿Probando el responsive? Yo también muevo la ventana así. Todo encaja.' : 'Testing responsive? I resize like that too. Everything fits.'}</p><button type="button" onClick={() => { setResponsive(false); dismissFastScroll() }} aria-label={fastScroll ? (es ? 'Cerrar aviso de scroll' : 'Dismiss scroll notice') : es ? 'Cerrar aviso responsive' : 'Dismiss responsive notice'}><X size={18} aria-hidden="true" /></button></aside>}
     <div className={`ghost-layer${ghostLeaving ? ' is-leaving' : ''}`} aria-hidden="true">{ghosts.map((point, index) => <div className={`ghost ghost--${ghostPersonalities[index]}`} key={index} style={{ transform: `translate(${point.x}px, ${point.y}px)` }}><MousePointer2 size={20} /><span>{index === 4 ? (es ? 'psst… Workspace → secret.ts' : 'psst… Workspace → secret.ts') : es ? ['¿qué hace esto?', 'con permiso…', '¡te sigo!', 'por aquí', '', 'yo también'][index] : ['what does this do?', 'excuse me…', 'following you!', 'this way', '', 'me too'][index]}</span></div>)}</div>
     {confetti && <div className="egg-confetti" aria-hidden="true">{Array.from({ length: 12 }, (_, i) => <i key={i} style={{ left: `${36 + i * 2.5}%`, animationDelay: `${i % 3 * .04}s` }} />)}</div>}
   </>

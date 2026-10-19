@@ -32,11 +32,11 @@ try {
  await page.keyboard.press('Tab')
  assert.equal(logs.length, 1)
  // One notice per resize burst, rearmed after a quiet interval, including reload.
- for (const width of [1300,1200,1100,1000,900]) { await page.setViewportSize({ width, height: 900 }); await page.waitForTimeout(100) }
+ for (const width of [1300,1100,1400,1100,1400,1100,1400,1100,1400,1100,1400,1100,1400]) { await page.setViewportSize({ width, height: 900 }); await page.waitForTimeout(170) }
  await page.locator('.responsive-toast').waitFor()
  await page.getByRole('button', { name: 'Cerrar aviso responsive' }).click()
  await page.waitForTimeout(2000)
- for (const width of [1000,1100,1200,1300,1440]) { await page.setViewportSize({ width, height: 900 }); await page.waitForTimeout(100) }
+ for (const width of [1100,1400,1100,1400,1100,1400,1100,1400,1100,1400,1100,1400,1440]) { await page.setViewportSize({ width, height: 900 }); await page.waitForTimeout(170) }
  assert.equal(await page.locator('.responsive-toast').count(), 1)
  await page.getByRole('button', { name: 'Cerrar aviso responsive' }).click()
  await terminal()

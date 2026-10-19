@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "query",
+          "key": "lang",
+          "value": "en"
+        }
+      ],
+      "destination": "/en/index.html"
+    }
+  ]
+}

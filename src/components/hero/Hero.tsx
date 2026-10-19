@@ -26,7 +26,7 @@ export function Hero({ locale }: { locale: Locale }) {
   return <section className="hero" aria-labelledby="hero-title">
     <div className="hero-filebar"><FileCode2 size={18} aria-hidden="true" /><span>hero.tsx</span></div>
     <div className="hero-heading editorial-grid">
-      <h1 id="hero-title"><span>{t.greeting}</span><span>{t.name}</span></h1>
+      <h1 id="hero-title"><span>{t.greeting}</span> <span>{t.name}</span></h1>
       <div className="hero-badges">
         <span className="badge badge--lime">Frontend Developer</span>
         <span className="badge badge--lavender">AI-Assisted Engineering</span>

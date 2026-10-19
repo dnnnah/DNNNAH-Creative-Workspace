@@ -132,9 +132,9 @@ html { scroll-padding-top: calc(var(--navbar-height) + 1rem); }
 .file-link { display: flex; align-items: center; gap: .625rem; min-height: 48px; padding: .75rem .625rem; font-family: var(--font-mono); font-size: .8125rem; text-decoration: none; }
 .file-link svg { flex-shrink: 0; }
 .file-link[aria-current] { background: var(--color-lime); border-radius: 4px; }
-.file-link[href]:focus-visible { outline: 2px solid var(--color-ink); outline-offset: -2px; }
-.file-link[href]:hover { background: var(--color-lavender); }
-.file-link--pending { color: #57564f; cursor: default; }
+.file-link[href]:focus-visible, button.file-link:focus-visible { outline: 2px solid var(--color-ink); outline-offset: -2px; }
+.file-link[href]:hover, button.file-link:hover { background: var(--color-lavender); }
+.file-link--pending { color: #515049; cursor: default; }
 .pending-status { margin-left: auto; font-family: var(--font-sans); font-size: .6875rem; }
 .active-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-ink); margin-left: auto; }
 .workspace-tools { margin-top: .75rem; padding-top: .5rem; border-top: 1px solid #aaa99f; }

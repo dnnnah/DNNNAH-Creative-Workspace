@@ -60,7 +60,7 @@ export function Journey({ locale }: { locale: Locale }) {
 
   return <div className="journey">
     <div className="journey-heading editorial-grid">
-      <h3><span className="journey-filename">journey.path</span>{t.journey}</h3>
+      <h3><span className="journey-filename">journey.path</span> {t.journey}</h3>
       <p>{t.journeyIntro}<ArrowDownRight size={36} aria-hidden="true" /></p>
     </div>
     <div className="journey-toolbar">

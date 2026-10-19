@@ -191,7 +191,7 @@ function PhoneCapture({ title, detail, alt, src, label, height, hint }: {
     <div className="protech-phone-stage">
       <MockFrame className="protech-phone" device="iPhone 17" color="black" height={830} hideNotch>
         <div className="protech-phone__screen" role="region" tabIndex={0} aria-label={label}>
-          <img src={src} alt={alt} width={1170} height={height} loading="lazy" decoding="async" />
+          <img src={src} alt={alt} width={780} height={height} loading="lazy" decoding="async" />
         </div>
       </MockFrame>
     </div>
@@ -303,7 +303,7 @@ export function ProtechCase({ locale }: { locale: Locale }) {
           alt={t.catalogAlt}
           src={sellerCatalogGrid}
           label={t.catalogScreenTitle}
-          height={12306}
+          height={8204}
           hint={t.phoneHint}
         />
         <PhoneCapture
@@ -312,7 +312,7 @@ export function ProtechCase({ locale }: { locale: Locale }) {
           alt={t.orderAlt}
           src={sellerOrderSearch}
           label={t.orderScreenTitle}
-          height={6312}
+          height={4208}
           hint={t.phoneHint}
         />
       </div>

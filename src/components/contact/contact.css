@@ -10,7 +10,7 @@
 .contact-resources h3 { margin: 0 0 .75rem; font: .75rem var(--font-mono); }
 .contact-resource { display: flex; align-items: center; justify-content: space-between; gap: .75rem; min-height: 52px; padding-block: .75rem; border-bottom: 1px solid #aaa99f; font: .8125rem var(--font-mono); text-decoration: none; }
 .contact-resource[href]:hover { background: var(--color-lavender); }
-.contact-resource--pending { color: #59584f; }
+.contact-resource--pending { color: #515049; }
 .contact-resource-status { font: .6875rem var(--font-sans); }
 .contact-signature { margin-top: 4rem; font: .75rem var(--font-mono); display: flex; gap: .75rem; flex-wrap: wrap; }
 .contact-signature span { background: var(--color-lime); padding-inline: .4rem; }
@@ -21,7 +21,7 @@
 .contact-code span { background: var(--color-lavender); padding-inline: .2rem; }
 .contact-fields { display: grid; gap: 1.5rem; }
 .contact-field { display: grid; grid-template-columns: 1.5rem minmax(0, 1fr); gap: .75rem; }
-.contact-line { font: .6875rem var(--font-mono); padding-top: .2rem; color: #59584f; }
+.contact-line { font: .6875rem var(--font-mono); padding-top: .2rem; color: #515049; }
 .contact-field label { display: block; margin-bottom: .5rem; font: .8125rem var(--font-mono); }
 .contact-field label span { font-size: .6875rem; }
 .contact-field input, .contact-field textarea { display: block; width: 100%; min-height: 48px; border: 1px solid #77766c; border-radius: 0; padding: .75rem; background: var(--color-cream); color: var(--color-ink); font: 1rem var(--font-sans); }
@@ -37,7 +37,7 @@
 .contact-submit:disabled { background: #e8e7df; cursor: not-allowed; }
 .contact-editor-foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: .5rem; border-top: 1px solid #77766c; padding: .75rem 1rem; font: .625rem var(--font-mono); }
 .contact-footer { border-top: 1px solid; display: flex; align-items: center; flex-wrap: wrap; gap: 1.5rem 3rem; padding-top: 2rem; }
-.contact-footer-brand { display: flex; gap: 1rem; align-items: center; font: 700 1.25rem var(--font-display); text-decoration: none; }
+.contact-footer-brand { display: inline-flex; gap: 1rem; align-items: center; min-height: 44px; min-width: 44px; font: 700 1.25rem var(--font-display); text-decoration: none; }
 .contact-footer-brand span, .contact-footer p { font: .6875rem var(--font-mono); }
 .contact-footer nav { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; }
 .contact-footer nav a { display: inline-flex; align-items: center; min-height: 44px; font: .75rem var(--font-mono); }

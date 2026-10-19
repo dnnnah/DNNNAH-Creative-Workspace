@@ -1,8 +1,10 @@
 import { ArrowDownRight, ArrowLeft, ArrowRight, ArrowUpRight, Folder, Code2 } from 'lucide-react'
 import type { Locale } from '../../i18n/messages'
 import { projects, type Project } from './content'
-import { ProtechCase } from './ProtechCase'
+import { lazy, Suspense } from 'react'
 import './projects.css'
+
+const ProtechCase = lazy(() => import('./ProtechCase').then(module => ({ default: module.ProtechCase })))
 
 function ProjectLinks({ project, locale }: { project: Project; locale: Locale }) {
   if (!project.demo && !project.github) return null
@@ -29,7 +31,7 @@ export function Projects({ locale }: { locale: Locale }) {
   const es = locale === 'es'
   return <section id="projects" className="projects" tabIndex={-1} aria-labelledby="projects-title">
     <div className="projects-filebar"><span><Folder size={18} aria-hidden="true" />projects/</span><span>{es ? 'Trabajo seleccionado' : 'Selected work'}</span></div>
-    <div className="projects-intro"><h2 id="projects-title">{es ? 'Ideas que toman' : 'Ideas taking'}<br /><span>{es ? 'forma propia.' : 'their own shape.'}</span></h2><p>{es ? 'Un encargo real, dos exploraciones académicas y una etapa anterior. Cada proyecto tiene su contexto.' : 'A real commission, two academic explorations and a previous chapter. Every project has its context.'}<ArrowDownRight size={40} strokeWidth={1} aria-hidden="true" /></p></div>
+    <div className="projects-intro"><h2 id="projects-title">{es ? 'Ideas que toman' : 'Ideas taking'} <br /><span>{es ? 'forma propia.' : 'their own shape.'}</span></h2><p>{es ? 'Un encargo real, dos exploraciones académicas y una etapa anterior. Cada proyecto tiene su contexto.' : 'A real commission, two academic explorations and a previous chapter. Every project has its context.'}<ArrowDownRight size={40} strokeWidth={1} aria-hidden="true" /></p></div>
     <div className="projects-masonry">{projects.map(project => <article className={`project-entry project-entry--${project.slug}`} key={project.slug}>
       <a className="project-link" href={`#projects/${project.slug}`} aria-label={`${es ? 'Ver caso' : 'View case study'}: ${project.name}`}><ProjectArt project={project} locale={locale} /><div className="project-heading"><h3>{project.name}</h3><ArrowUpRight size={24} aria-hidden="true" /></div></a>
       <p className="project-status">{project.status[locale]}</p><p className="project-summary">{project.summary[locale]}</p>
@@ -42,7 +44,7 @@ export function Projects({ locale }: { locale: Locale }) {
 }
 
 export function ProjectCase({ project, locale }: { project: Project; locale: Locale }) {
-  if (project.slug === 'protech') return <ProtechCase locale={locale} />
+  if (project.slug === 'protech') return <Suspense fallback={<div className="project-case"><a href="#projects">{locale === 'es' ? 'Volver a proyectos' : 'Back to projects'}</a><p role="status">{locale === 'es' ? 'Cargando caso…' : 'Loading case study…'}</p></div>}><ProtechCase locale={locale} /></Suspense>
 
   const es = locale === 'es'
   const projectIndex = projects.indexOf(project)

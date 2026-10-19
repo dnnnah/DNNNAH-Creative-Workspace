@@ -79,6 +79,7 @@ try {
   assert.equal(await page.getByRole('button', { name: 'Abrir menú', exact: true }).evaluate(el => el === document.activeElement), true)
   await page.getByRole('button', { name: 'Abrir menú', exact: true }).click()
   await page.getByRole('button', { name: 'Workspace', exact: true }).click()
+  await page.getByRole('dialog', { name: 'Workspace', exact: true }).waitFor({ state: 'visible' })
   assert.equal(await page.locator('dialog[open]').count(), 1)
   await page.keyboard.press('Escape')
   for (const [command, target] of [['open hero', 'main'], ['open about', 'about'], ['open skills', 'skills'], ['open projects', 'projects'], ['open contact', 'contact'], ['hire', 'contact']]) {

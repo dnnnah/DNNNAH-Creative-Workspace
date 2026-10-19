@@ -66,7 +66,7 @@ export function Navbar({ locale, onLocaleChange, onWorkspaceOpen, onTerminalOpen
     <button className="terminal-shortcut" type="button" aria-label={`${es ? 'Abrir Terminal' : 'Open Terminal'} (${shortcut})`} aria-keyshortcuts={apple ? 'Meta+K' : 'Control+K'} aria-haspopup="dialog" onClick={() => {
       setOpen(false)
       onTerminalOpen?.()
-    }}><Terminal size={18} aria-hidden="true" /><kbd>{shortcut}</kbd></button>
+    }}><kbd>{shortcut}</kbd></button>
     <button ref={toggle} className="menu-toggle" type="button" aria-label={es ? (open ? 'Cerrar menú' : 'Abrir menú') : (open ? 'Close menu' : 'Open menu')} aria-expanded={open} aria-controls="primary-navigation" onClick={() => open ? close() : setOpen(true)}>
       {open ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
     </button>

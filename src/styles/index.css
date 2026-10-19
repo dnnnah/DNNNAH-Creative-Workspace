@@ -159,4 +159,4 @@ html { scroll-padding-top: calc(var(--navbar-height) + 1rem); }
 .terminal-shortcut:hover { background: var(--color-lavender); }
 .terminal-shortcut kbd { font: 12px var(--font-mono); white-space: nowrap; }
 @media (max-width: 400px) { .terminal-shortcut { gap: 4px; padding-inline: 6px; } .masthead { column-gap: 8px; } .language { gap: 0; } }
-@media (max-width: 35rem) { .masthead .wordmark { font-size: 0; gap: 0; } .terminal-shortcut > svg { display: none; } }
+@media (max-width: 35rem) { .masthead .wordmark { font-size: 0; gap: 0; } }

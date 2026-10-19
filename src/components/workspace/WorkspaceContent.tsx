@@ -28,6 +28,7 @@ export function WorkspaceContent({ file, locale, onSelect, onNavigate, onClose }
       <h2>secret.ts</h2><p className="ws-lead">{es ? 'La curiosidad también es una herramienta.' : 'Curiosity is a tool, too.'}</p>
       <pre className="secret-code"><code>{'const portfolio = {\n  editorial: 0.75,\n  playground: 0.25,\n  curiosity: true\n}'}</code></pre>
       <p>{es ? 'Tres toques en D. revelan una nota. Aquí puedes intercambiar la lima y la lavanda: un pequeño cambio de perspectiva, sin perder el hilo.' : 'Tap D. three times to reveal a note. Here you can swap lime and lavender: a small change of perspective without losing your place.'}</p>
+      <p>{es ? 'En Terminal prueba curl cheat-sheet: café, Matrix, git blame y una catástrofe de mentira. El código ↑ ↑ ↓ ↓ ← → ← → B A deja la presentación sin CSS durante tres segundos. Si esperas, quizá lleguen visitas.' : 'Try curl cheat-sheet in Terminal: coffee, Matrix, git blame and a pretend catastrophe. ↑ ↑ ↓ ↓ ← → ← → B A strips the presentation for three seconds. Wait quietly and visitors may arrive.'}</p>
       <button className="ws-link" type="button" aria-pressed={ink} onClick={toggleInk}>{es ? (ink ? 'Restaurar paleta' : 'Intercambiar acentos') : (ink ? 'Restore palette' : 'Swap accents')}</button>
     </> : file.id === 'hero' ? <>
       <div className="ws-intro"><div><h2>{t.greeting} <br /><span>{t.name}</span></h2><p className="ws-lead">{t.description}</p></div><div className="ws-monogram" aria-hidden="true">D<span>.</span></div></div>

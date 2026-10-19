@@ -28,3 +28,29 @@ button:active:not(:disabled) { transform: translateY(1px); }
  @keyframes detail-enter { from { opacity: .6; translate: 0 5px; } to { opacity: 1; translate: 0 0; } }
 }
 @media (prefers-reduced-motion: reduce) { button:active:not(:disabled), .brand-egg:hover, .brand-egg:focus-visible { transform: none; } }
+/* A scoped presentation reset: stylesheets, DOM, semantics and events stay intact. */
+html.css-broken .page, html.css-broken .page *:not(svg):not(svg *) { color: #111 !important; background: #fff !important; font-family: serif !important; letter-spacing: normal !important; text-transform: none !important; border-color: transparent !important; box-shadow: none !important; text-shadow: none !important; border-radius: 0 !important; animation: none !important; transition: none !important; }
+html.css-broken .page :is(main, section, article, nav, header, footer, .hero-grid, .skills-grid, .projects-grid) { display: block !important; grid-template-columns: none !important; }
+html.css-broken .page a { color: #143c99 !important; text-decoration: underline !important; }
+html.css-broken .page :focus-visible { outline: 2px solid #143c99 !important; }
+.egg-status, .responsive-toast { position: fixed; z-index: 45; bottom: 1rem; left: 1rem; max-width: min(30rem, calc(100% - 2rem)); padding: 1rem; background: var(--color-lavender); color: var(--color-ink); border: 1px solid var(--color-ink); }
+.egg-status:empty { display: none; }
+.egg-status { pointer-events: none; }
+.responsive-toast { display: flex; align-items: center; gap: 1rem; }
+.responsive-toast button { flex-shrink: 0; min-width: 44px; min-height: 44px; display: grid; place-items: center; background: transparent; color: inherit; border: 1px solid currentColor; }
+.ghost-layer, .egg-confetti { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+.ghost { position: absolute; top: 0; left: 0; display: flex; align-items: start; gap: .25rem; color: var(--color-ink); transition: transform 750ms ease-in-out; opacity: .7; }
+.ghost svg { fill: var(--color-lavender); flex-shrink: 0; }
+.ghost--travieso svg, .ghost--guia svg { fill: var(--color-lime); }
+.ghost span { margin-top: 1rem; max-width: 10rem; padding: .2rem .4rem; background: var(--color-cream); font: .6875rem var(--font-mono); }
+.egg-confetti i { position: absolute; top: 20%; width: 5px; height: 9px; background: var(--color-lavender); animation: egg-fall 800ms ease-out forwards; }
+.egg-confetti i:nth-child(even) { background: var(--color-lime); }
+@keyframes egg-fall { to { transform: translateY(130px) rotate(120deg); opacity: 0; } }
+.term-demolition button { color: inherit; background: transparent; border: 1px solid currentColor; min-height: 44px; padding: .5rem; }
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) { .ghost-layer, .egg-confetti { display: none; } }
+
+html.css-broken .page .primary-navigation:not(.is-open), html.css-broken .page [hidden] { display: none !important; }
+
+.ghost-layer { opacity: 1; transition: opacity 500ms ease-out; }
+.ghost-layer.is-leaving { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { .ghost-layer { transition: none; } }

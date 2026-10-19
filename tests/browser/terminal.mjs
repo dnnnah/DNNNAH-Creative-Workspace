@@ -23,7 +23,7 @@ try {
   assert.equal(await input.evaluate(el => el === document.activeElement), true)
   assert.equal(await page.locator('body').evaluate(el => el.style.overflow), 'hidden')
   if (!process.env.SKIP_CAPTURES) await page.screenshot({ path: `${directory}/terminal-desktop.png` })
-  for (const [command, expected] of [['help', 'sudo rm -rf /'], ['ls', 'hero.tsx'], ['cat hero.tsx', 'Donnovan'], ['cat about.md', 'UDG / CUCEI'], ['cat skills.ts', 'Playwright'], ['cat projects/', 'Protech'], ['cat contact.tsx', 'Abrir Contact'], ['skills', 'TypeScript'], ['stack', 'TypeScript'], ['projects', 'PawPass'], ['whoami', 'Donnovan'], ['git blame', '00000000 (Donnovan 1)'], ['curl cheat-sheet', 'Shift+Tab'], ['sudo make-coffee', 'imaginario'], ['sudo rm -rf /', 'no se ha eliminado nada'], ['nonsense', 'Comando desconocido'], ['cat ../../.env', 'Archivo desconocido']]) {
+  for (const [command, expected] of [['help', 'easter'], ['ls', 'hero.tsx'], ['cat hero.tsx', 'Donnovan'], ['cat about.md', 'UDG / CUCEI'], ['cat skills.ts', 'Playwright'], ['cat projects/', 'Protech'], ['cat contact.tsx', 'Abrir Contact'], ['skills', 'TypeScript'], ['stack', 'TypeScript'], ['projects', 'PawPass'], ['whoami', 'Donnovan'], ['git blame', '00000000 (Donnovan 1)'], ['curl cheat-sheet', 'git blame'], ['sudo make-coffee', 'imaginario'], ['sudo rm -rf /', 'No se ha eliminado nada'], ['nonsense', 'Comando desconocido'], ['cat ../../.env', 'Archivo desconocido']]) {
     await run(command)
     assert.ok((await dialog.getByRole('log').innerText()).includes(expected), command)
   }
@@ -49,7 +49,7 @@ try {
   assert.equal(await input.inputValue(), 'sudo make-coffee')
   await input.fill('s')
   await input.press('Tab')
-  assert.match(await dialog.getByRole('status').innerText(), /skills.*stack/s)
+  assert.match(await dialog.locator('.term-suggestions').innerText(), /skills.*stack/s)
   await input.press('Shift+Tab')
   assert.equal(await dialog.evaluate(el => el.contains(document.activeElement)), true)
   await input.focus()

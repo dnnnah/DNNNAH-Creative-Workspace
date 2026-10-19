@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Braces, ChevronDown, ChevronRight, FileCode2, FileText, Folder, PanelLeft, PanelTop, X, Eye } from 'lucide-react'
 import type { KeyboardEvent } from 'react'
 import type { Locale } from '../../i18n/messages'
-import { sectionFiles, workspaceFiles, type WorkspaceFile } from './files'
+import { secretFile, sectionFiles, workspaceFiles, type WorkspaceFile } from './files'
 import { WorkspaceContent } from './WorkspaceContent'
 import './workspace.css'
 
@@ -90,7 +90,8 @@ export function Workspace({ locale, onLocaleChange, onClose, onNavigate }: { loc
     <div className="ws-mobile-toolbar"><button aria-expanded={filesVisible} aria-controls="ws-explorer" onClick={() => setFilesVisible(!filesVisible)}><PanelLeft size={18} aria-hidden="true" />{es ? 'Archivos' : 'Files'}{filesVisible ? <ChevronDown size={16} aria-hidden="true" /> : <ChevronRight size={16} aria-hidden="true" />}</button><span>{file?.name ?? (es ? 'Sin archivo' : 'No file')}</span></div>
     <nav id="ws-explorer" className={`ws-explorer${filesVisible ? ' is-visible' : ''}`} aria-label={es ? 'Explorador de archivos' : 'File Explorer'}>
       <div className="ws-explorer-label">{es ? 'Explorador' : 'Explorer'}<span aria-hidden="true">/</span></div><p className="ws-root">dnnnah.portfolio</p>
-      <ul>{sectionFiles.map(item => <li key={item.id}>{item.id === 'projects' ? <><div className="ws-folder-row">{fileButton(item)}<button className="ws-expand" aria-label={`${es ? (expanded ? 'Contraer' : 'Expandir') : (expanded ? 'Collapse' : 'Expand')} projects/`} aria-expanded={expanded} aria-controls="ws-project-files" onClick={() => setExpanded(!expanded)}>{expanded ? <ChevronDown size={16} aria-hidden="true" /> : <ChevronRight size={16} aria-hidden="true" />}</button></div><ul id="ws-project-files" hidden={!expanded}>{workspaceFiles.slice(sectionFiles.length).map(child => <li key={child.id}>{fileButton(child)}</li>)}</ul></> : fileButton(item)}</li>)}</ul>
+      <ul>{sectionFiles.map(item => <li key={item.id}>{item.id === 'projects' ? <><div className="ws-folder-row">{fileButton(item)}<button className="ws-expand" aria-label={`${es ? (expanded ? 'Contraer' : 'Expandir') : (expanded ? 'Collapse' : 'Expand')} projects/`} aria-expanded={expanded} aria-controls="ws-project-files" onClick={() => setExpanded(!expanded)}>{expanded ? <ChevronDown size={16} aria-hidden="true" /> : <ChevronRight size={16} aria-hidden="true" />}</button></div><ul id="ws-project-files" hidden={!expanded}>{workspaceFiles.filter(item => item.href.startsWith('#projects/')).map(child => <li key={child.id}>{fileButton(child)}</li>)}</ul></> : fileButton(item)}</li>)}</ul>
+      {fileButton(secretFile)}
       <div className="ws-explorer-foot"><span aria-hidden="true">{'{ }'}</span><p>{es ? 'Abre un archivo. Encuentra una idea.' : 'Open a file. Find an idea.'}</p></div>
     </nav>
     <section className="ws-editor" aria-label={es ? 'Documentos del portfolio' : 'Portfolio documents'}>

@@ -5,10 +5,12 @@ import { aboutCopy } from '../about/content'
 import { categories, labels, technologies } from '../skills/content'
 import { projects } from '../projects/content'
 import { contactLinks } from '../contact/links'
+import { usePlayground } from '../playground/context'
 import type { WorkspaceFile } from './files'
 
 type Props = { file: WorkspaceFile; locale: Locale; onSelect: (id: string) => void; onNavigate: (href: string) => void; onClose: () => void }
 export function WorkspaceContent({ file, locale, onSelect, onNavigate, onClose }: Props) {
+  const { ink, toggleInk } = usePlayground()
   const es = locale === 'es'
   const t = messages[locale]
   const about = aboutCopy[locale]
@@ -22,7 +24,12 @@ export function WorkspaceContent({ file, locale, onSelect, onNavigate, onClose }
     return <a className={`ws-link${primary ? ' ws-link--primary' : ''}`} href={href} onClick={follow}>{label}<ArrowUpRight size={18} aria-hidden="true" /></a>
   }
   return <article className={`ws-document ws-document--${file.id}`}>
-    {file.id === 'hero' ? <>
+    {file.id === 'secret' ? <>
+      <h2>secret.ts</h2><p className="ws-lead">{es ? 'La curiosidad también es una herramienta.' : 'Curiosity is a tool, too.'}</p>
+      <pre className="secret-code"><code>{'const portfolio = {\n  editorial: 0.75,\n  playground: 0.25,\n  curiosity: true\n}'}</code></pre>
+      <p>{es ? 'Tres toques en D. revelan una nota. Aquí puedes intercambiar la lima y la lavanda: un pequeño cambio de perspectiva, sin perder el hilo.' : 'Tap D. three times to reveal a note. Here you can swap lime and lavender: a small change of perspective without losing your place.'}</p>
+      <button className="ws-link" type="button" aria-pressed={ink} onClick={toggleInk}>{es ? (ink ? 'Restaurar paleta' : 'Intercambiar acentos') : (ink ? 'Restore palette' : 'Swap accents')}</button>
+    </> : file.id === 'hero' ? <>
       <div className="ws-intro"><div><h2>{t.greeting}<br /><span>{t.name}</span></h2><p className="ws-lead">{t.description}</p></div><div className="ws-monogram" aria-hidden="true">D<span>.</span></div></div>
       <div className="ws-principle"><p>{t.principle}</p><span aria-hidden="true">{'{ / }'}</span></div>
       <div className="ws-approach"><h3>{es ? 'De la lógica al detalle.' : 'From logic to detail.'}</h3><ul>{t.phrases.map(phrase => <li key={phrase}>{phrase}</li>)}</ul></div>

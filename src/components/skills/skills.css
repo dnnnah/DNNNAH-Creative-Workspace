@@ -24,6 +24,7 @@
 .skill-piece--5 { grid-column: span 4; margin-bottom: 1rem; }
 .skill-piece img, .skill-piece > svg:not(.skill-arrow) { width: clamp(56px, 7vw, 96px); height: 96px; object-fit: contain; }
 .skill-piece--0 img { width: 132px; height: 132px; }
+.skill-piece img.skill-mark--mono { filter: grayscale(1) brightness(0); }
 .skill-piece[aria-pressed='true'] { border: 2px solid var(--color-ink); background: var(--color-lime); }
 .skill-piece:hover { background: var(--color-lavender); border-color: var(--color-ink); }
 .skill-index { position: absolute; top: 1rem; left: 1rem; font: .625rem var(--font-mono); }
@@ -34,9 +35,9 @@
 .inspector-category { display: block; margin-top: 2.5rem; color: var(--color-lime); font: .6875rem var(--font-mono); }
 .skill-inspector h3 { margin: .75rem 0 1.25rem; font: 500 clamp(1.75rem, 3vw, 2.75rem)/1.1 var(--font-display); letter-spacing: -.035em; overflow-wrap: anywhere; }
 .skill-inspector p { font-size: .875rem; }
-.inspector-context { margin-top: 2.5rem; display: grid; gap: .5rem; padding-top: 1.25rem; border-top: 1px solid #65645e; }
-.inspector-context span { font: .625rem var(--font-mono); }
-.inspector-context strong { font: 500 1.25rem var(--font-display); }
+.inspector-purpose { margin-top: 2.5rem; display: grid; gap: .5rem; padding-top: 1.25rem; border-top: 1px solid #65645e; }
+.inspector-purpose span { font: .625rem var(--font-mono); }
+.inspector-purpose strong { font: 500 1.25rem var(--font-display); }
 .skill-inspector .inspector-note { margin-top: 3rem; color: var(--color-lavender); font-size: .75rem; }
 .skills-end { margin-top: 3rem; border-bottom: 0; font-size: .6875rem; }
 @media (max-width: 63.99rem) {

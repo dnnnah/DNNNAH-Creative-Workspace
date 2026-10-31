@@ -1,15 +1,15 @@
 export const aboutCopy = {
   es: {
-    title: 'Más que solo código.', intro: 'Soy Donnovan. Conecto ideas, sistemas y criterio.',
+    title: 'Más que solo código.', intro: 'Soy Donnovan. Me interesa cómo una idea se convierte en algo útil.',
     bio: 'Estudio Desarrollo de Sistemas Web en la Universidad de Guadalajara (CUCEI), en modalidad virtual. En octubre de 2026 curso el sexto semestre: sigo aprendiendo, construyendo y afinando mi forma de trabajar.',
-    note: 'La tecnología cambia. La intención permanece.', portrait: 'Autorretrato abstracto: una identidad en construcción.',
+    note: 'Cada proyecto me deja nuevas preguntas.', portrait: 'Autorretrato abstracto: una identidad en construcción.',
     journey: 'Un camino que sigue tomando forma.', journeyIntro: 'Aprender y hacer. A veces en paralelo, siempre conectados.',
     filters: ['Todo', 'Experiencia', 'Educación'], count: 'hitos visibles', experience: 'Experiencia', education: 'Educación',
-    thinkTitle: 'Así pienso.', quote: 'No solo doy prompts. Dirijo.',
+    thinkTitle: 'Así pienso.', quote: 'Preguntar, elegir y volver a mirar.',
     steps: [
-      { title: 'Entender antes de construir.', text: 'Defino el problema, el alcance y el plan. La arquitectura empieza con preguntas y decisiones, antes de pedir una sola línea de código.' },
-      { title: 'Una intención. Muchas herramientas.', text: 'Dirijo agentes de IA con OpenCode, GPT, Claude y Gemini. Distribuyo tareas y contexto, reviso propuestas y mantengo una dirección coherente.' },
-      { title: 'El resultado se comprueba.', text: 'Valido los flujos con Playwright, pruebas y revisión. Itero sobre lo que falla y respondo por la calidad de la experiencia.' },
+      { word: 'PIENSO', title: 'Entender antes de construir.', text: 'Empiezo por el problema y por quienes van a usar el resultado. Aclaro qué hace falta resolver y defino un alcance que pueda llevar a término.' },
+      { word: 'DIRIJO', title: 'Elegir qué va primero.', text: 'Priorizo lo que hace útil al producto, evalúo qué es viable y dejo espacio para mejoras. Me apoyo en IA para explorar opciones y reviso sus propuestas antes de integrarlas.' },
+      { word: 'REFINO', title: 'Volver sobre lo que falta.', text: 'Reviso recorridos completos, detecto fricciones y ajusto. Cuando algo falla, busco entender la causa y divido el problema en pasos manejables.' },
     ],
     events: [
       { category: 'education', time: '2019–2022', title: 'Técnico en Informática', place: 'Instituto Politécnico Nacional · CECyT 14', text: 'Para mi tesina, colaboré con albergues de mascotas de compañía en un sitio web para fomentar la adopción. También obtuve el tercer lugar en una competencia de proyectos de informática entre CECyTs del Instituto Politécnico Nacional.', tags: ['Fundamentos de programación', 'Bases de datos', 'C++ · Java', 'JavaScript · PHP', 'MySQL · MongoDB'] },
@@ -21,16 +21,16 @@ export const aboutCopy = {
     ],
   },
   en: {
-    title: 'More than just code.', intro: 'I’m Donnovan. I connect ideas, systems and judgment.',
+    title: 'More than just code.', intro: 'I’m Donnovan. I’m interested in how an idea becomes something useful.',
     bio: 'I study Web Systems Development at the University of Guadalajara (CUCEI) through its online program. As of October 2026, I’m in my sixth semester: still learning, building and refining the way I work.',
-    note: 'Technology changes. Intention stays.', portrait: 'Abstract self-portrait: an identity in progress.',
+    note: 'Every project leaves me with new questions.', portrait: 'Abstract self-portrait: an identity in progress.',
     journey: 'A path still taking shape.', journeyIntro: 'Learning and making. Sometimes in parallel, always connected.',
     filters: ['All', 'Experience', 'Education'], count: 'visible milestones', experience: 'Experience', education: 'Education',
-    thinkTitle: 'How I think.', quote: "I don’t just prompt. I direct.",
+    thinkTitle: 'How I think.', quote: "Ask, choose and look again.",
     steps: [
-      { title: 'Understand before building.', text: 'I define the problem, scope and plan. Architecture starts with questions and decisions, before requesting a single line of code.' },
-      { title: 'One intention. Many tools.', text: 'I direct AI agents using OpenCode, GPT, Claude and Gemini. I distribute tasks and context, review proposals and keep a coherent direction.' },
-      { title: 'The result needs proof.', text: 'I validate flows with Playwright, tests and review. I iterate on what fails and take responsibility for the quality of the experience.' },
+      { word: 'THINK', title: 'Understand before building.', text: 'I start with the problem and the people who will use the result. I clarify what needs solving and define a scope I can deliver.' },
+      { word: 'DIRECT', title: 'Choose what comes first.', text: 'I prioritize what makes the product useful, weigh what is feasible and leave room for improvements. I use AI to explore options and review proposals before integrating them.' },
+      { word: 'REFINE', title: 'Revisit what needs work.', text: 'I review complete flows, spot friction and adjust. When something fails, I try to understand why and break the problem into manageable steps.' },
     ],
     events: [
       { category: 'education', time: '2019–2022', title: 'Information Technology Technician', place: 'National Polytechnic Institute · CECyT 14', text: 'For my thesis, I collaborated with pet shelters on a website to promote adoption. I also earned third place in a computer science project competition among CECyT schools at the National Polytechnic Institute.', tags: ['Programming fundamentals', 'Databases', 'C++ · Java', 'JavaScript · PHP', 'MySQL · MongoDB'] },

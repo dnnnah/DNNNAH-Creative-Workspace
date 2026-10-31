@@ -4,8 +4,8 @@ import { messages, type Locale } from '../../i18n/messages'
 import { startRotation } from './rotation'
 import { Button } from '../ui/Button'
 
-function Arrow() {
-  return <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M5 19 19 5M5 5h14v14" /></svg>
+function Arrow({ down = false }: { down?: boolean }) {
+  return <svg className="action-arrow" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d={down ? 'M12 5v14m-7-7 7 7 7-7' : 'M5 19 19 5M5 5h14v14'} /></svg>
 }
 
 export function Hero({ locale }: { locale: Locale }) {
@@ -44,7 +44,7 @@ export function Hero({ locale }: { locale: Locale }) {
         <p>{t.description}</p>
         <div className="hero-actions">
           <a className="button" href="https://github.com/dnnnah">{t.github}<Arrow /></a>
-          <a className="button source-link" href="#projects">{t.source}<Arrow /></a>
+          <a className="button source-link" href="#projects">{t.source}<Arrow down /></a>
         </div>
       </div>
     </div>

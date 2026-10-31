@@ -21,7 +21,7 @@ export function About({ locale }: { locale: Locale }) {
     <div className="thinking" aria-labelledby="thinking-title">
       <div className="thinking-heading"><h3 id="thinking-title">{t.thinkTitle}</h3><p>{t.quote}</p></div>
       <div className="thinking-grid editorial-grid">{t.steps.map((step, index) => { const Mark = [CircleHelp, ArrowUpRight, RotateCcw][index]; return <article key={step.title} className={`thinking-step thinking-step--${index}`}>
-        <span className="thinking-word">{['THINK', 'DIRECT', 'REFINE'][index]}</span><h4>{step.title}</h4><p>{step.text}</p>
+        <span className="thinking-word">{step.word}</span><h4>{step.title}</h4><p>{step.text}</p>
         <Mark className="thinking-mark" size={32} strokeWidth={1.5} aria-hidden="true" />
       </article>})}</div>
     </div>

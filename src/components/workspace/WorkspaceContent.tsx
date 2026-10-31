@@ -42,9 +42,9 @@ export function WorkspaceContent({ file, locale, onSelect, onNavigate, onClose }
       <h3>{about.journey}</h3><ol className="ws-journey">{about.events.map(event => <li key={event.title}><span>{event.time} · {event.place}</span><h4>{event.title}</h4><p>{event.text}</p></li>)}</ol>
       {link(file.href, es ? 'Ver sección original' : 'View original section')}
     </> : file.id === 'skills' ? <>
-      <h2>{es ? 'Una intención. Muchas herramientas.' : 'One intention. Many tools.'}</h2>
+      <h2>{es ? 'Herramientas en uso.' : 'Tools in practice.'}</h2>
       <p className="ws-lead">{about.note}</p>
-      {categories.filter(category => category !== 'all').map(category => <section className="ws-tool-group" key={category}><h3>{labels[locale][category]}</h3><dl>{technologies.filter(tool => tool.category === category).map(tool => <div key={tool.name}><dt>{tool.name}{tool.context && <span> / {tool.context}</span>}</dt><dd>{tool.use[locale]}</dd></div>)}</dl></section>)}
+      {categories.filter(category => category !== 'all').map(category => <section className="ws-tool-group" key={category}><h3>{labels[locale][category]}</h3><dl>{technologies.filter(tool => tool.category === category).map(tool => <div key={tool.name}><dt>{tool.name}</dt><dd>{tool.use[locale]}</dd></div>)}</dl></section>)}
       {link(file.href, es ? 'Ver sección original' : 'View original section')}
     </> : file.id === 'projects' ? <>
       <h2>{es ? <>Ideas con <br /><span>forma propia.</span></> : <>Ideas with <br /><span>their own shape.</span></>}</h2>

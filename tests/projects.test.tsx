@@ -33,6 +33,15 @@ test('cada enlace de galería resuelve un caso bilingüe con retorno y sin enlac
         expect(html).toContain('href="#projects/dnnnah-runtime"')
         expect(html).toContain('href="#projects/pawpass"')
         expect(html).not.toContain('href="http')
+      } else if (slug === 'dnnnah-runtime') {
+        expect(html).toContain('Claude')
+        expect(html).toContain('git log --oneline')
+        expect(html).toContain(locale === 'es' ? 'boceto funcional' : 'functional sketch')
+        expect(html).toContain('profile-dark.webp')
+        for (const image of ['hero.webp', 'profile-light.webp', 'terminal.webp']) expect(html).toContain(image)
+        expect(html).toContain(locale === 'es' ? 'Tipo de proyecto' : 'Project type')
+        expect(html).toContain('href="#projects/nutria"')
+        expect(html).toContain('href="#projects/protech"')
       } else {
         expect(html).toContain(locale === 'es' ? 'Estado y alcance' : 'Status and scope')
         expect(html).toContain(locale === 'es' ? 'No es una captura' : 'Not a screenshot')
@@ -70,18 +79,18 @@ test('publica únicamente las tres demos confirmadas tanto en tarjetas como en c
   }
 })
 
-test('ofrece GitHub solo para NutrIA y PawPass con los enlaces confirmados', async () => {
+test('ofrece los tres repositorios públicos confirmados', async () => {
   const { Projects, ProjectCase } = await import('../src/components/projects/Projects')
   const { projects } = await import('../src/components/projects/content')
   for (const locale of ['es', 'en'] as const) {
     const gallery = renderToStaticMarkup(<Projects locale={locale} />)
-    expect(gallery.match(/class="project-github"/g)).toHaveLength(2)
-    for (const [slug, url] of [['nutria', 'https://github.com/dnnnah/nutrIA'], ['pawpass', 'https://github.com/dnnnah/petCarnet']]) {
+    expect(gallery.match(/class="project-github"/g)).toHaveLength(3)
+    for (const [slug, url] of [['nutria', 'https://github.com/dnnnah/nutrIA'], ['pawpass', 'https://github.com/dnnnah/petCarnet'], ['dnnnah-runtime', 'https://github.com/dnnnah/dnnnah-runtime']]) {
       expect(gallery).toContain(`href="${url}"`)
       const html = await renderCase(<ProjectCase project={projects.find(project => project.slug === slug)!} locale={locale} />)
       expect(html).toContain(`href="${url}"`)
     }
-    for (const project of projects.filter(project => ['protech', 'dnnnah-runtime'].includes(project.slug))) {
+    for (const project of projects.filter(project => project.slug === 'protech')) {
       expect(await renderCase(<ProjectCase project={project} locale={locale} />)).not.toContain('class="project-github"')
     }
   }

@@ -31,12 +31,12 @@ export const projects: Project[] = [
     tools: ['React', 'Tailwind', 'TypeScript'],
   },
   {
-    slug: 'dnnnah-runtime', name: 'DNNNAH Runtime', demo: 'https://dnnnah-runtime.vercel.app/',
-    status: { es: 'Portafolio anterior', en: 'Previous portfolio' },
-    summary: { es: 'Otra forma de contar el código.', en: 'Another way to tell the code’s story.' },
-    context: { es: 'Mi portafolio anterior, con una identidad visual inspirada en Go.', en: 'My previous portfolio, with a visual identity inspired by Go.' },
-    approach: { es: 'La temática Go era el lenguaje visual del portafolio. No se asume que Go fuera su tecnología de implementación.', en: 'The Go theme was the portfolio’s visual language. Go is not assumed to have been its implementation technology.' },
-    limits: { es: 'Una referencia a la etapa anterior, sin métricas ni enlaces no verificados. La composición tipográfica es una interpretación gráfica, no una captura del sitio.', en: 'A reference to the previous chapter, without metrics or unverified links. The typographic composition is a graphic interpretation, not a site screenshot.' },
+    slug: 'dnnnah-runtime', name: 'DNNNAH Runtime', github: 'https://github.com/dnnnah/dnnnah-runtime', demo: 'https://dnnnah-runtime.vercel.app/',
+    status: { es: 'Experimento · Transición al frontend', en: 'Experiment · A move to frontend' },
+    summary: { es: 'El portafolio backend donde descubrí que mi lugar estaba en la interfaz.', en: 'The backend portfolio where I found my place in the interface.' },
+    context: { es: 'Quería presentarme como desarrollador de Go. Al construir mi portafolio con Claude, me descubrí más emocionado por diseñar la experiencia que por los proyectos que iba a mostrar.', en: 'I wanted to introduce myself as a Go developer. Building my portfolio with Claude, I found myself more excited about designing the experience than the projects I planned to show.' },
+    approach: { es: 'Dirigí a Claude para desarrollar una identidad inspirada en Go, componentes y animaciones. Iteré las propuestas y también ajusté CSS y Tailwind para acercar la interfaz a mi personalidad.', en: 'I directed Claude to develop a Go-inspired identity, components and animations. I iterated on proposals and also adjusted CSS and Tailwind to make the interface feel more personal.' },
+    limits: { es: 'Runtime quedó como experimento y boceto funcional. El caso documenta mi transición al frontend y lo que aprendí trabajando con IA y Git.', en: 'Runtime remained an experiment and functional sketch. The case documents my move to frontend and what I learned working with AI and Git.' },
     tools: ['React', 'Tailwind', 'TypeScript'],
   },
 ]

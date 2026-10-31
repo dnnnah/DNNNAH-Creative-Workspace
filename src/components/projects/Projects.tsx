@@ -5,6 +5,7 @@ import { lazy, Suspense } from 'react'
 import './projects.css'
 
 const ProtechCase = lazy(() => import('./ProtechCase').then(module => ({ default: module.ProtechCase })))
+const RuntimeCase = lazy(() => import('./RuntimeCase').then(module => ({ default: module.RuntimeCase })))
 
 function ProjectLinks({ project, locale }: { project: Project; locale: Locale }) {
   if (!project.demo && !project.github) return null
@@ -44,6 +45,7 @@ export function Projects({ locale }: { locale: Locale }) {
 }
 
 export function ProjectCase({ project, locale }: { project: Project; locale: Locale }) {
+  if (project.slug === 'dnnnah-runtime') return <Suspense fallback={<div className="project-case"><a href="#projects">{locale === 'es' ? 'Volver a proyectos' : 'Back to projects'}</a><p role="status">{locale === 'es' ? 'Cargando historia…' : 'Loading story…'}</p></div>}><RuntimeCase locale={locale} /></Suspense>
   if (project.slug === 'protech') return <Suspense fallback={<div className="project-case"><a href="#projects">{locale === 'es' ? 'Volver a proyectos' : 'Back to projects'}</a><p role="status">{locale === 'es' ? 'Cargando caso…' : 'Loading case study…'}</p></div>}><ProtechCase locale={locale} /></Suspense>
 
   const es = locale === 'es'

@@ -160,3 +160,19 @@ html { scroll-padding-top: calc(var(--navbar-height) + 1rem); }
 .terminal-shortcut kbd { font: 12px var(--font-mono); white-space: nowrap; }
 @media (max-width: 400px) { .terminal-shortcut { gap: 4px; padding-inline: 6px; } .masthead { column-gap: 8px; } .language { gap: 0; } }
 @media (max-width: 35rem) { .masthead .wordmark { font-size: 0; gap: 0; } }
+
+/* Directional feedback follows the destination without moving the label. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+  .hero-actions .action-arrow,
+  :is(a, button) > .lucide-arrow-up-right,
+  :is(a, button) > .lucide-arrow-right,
+  :is(a, button) > .lucide-arrow-left {
+    transition: transform 200ms cubic-bezier(.2, .8, .2, 1);
+  }
+  .hero-actions a:is(:hover, :focus-visible) .action-arrow,
+  :is(a, button):is(:hover, :focus-visible) > .lucide-arrow-up-right { transform: translate(2px, -2px); }
+  .hero-actions .source-link:is(:hover, :focus-visible) .action-arrow { transform: translateY(3px); }
+  :is(a, button):is(:hover, :focus-visible) > .lucide-arrow-right { transform: translateX(3px); }
+  :is(a, button):is(:hover, :focus-visible) > .lucide-arrow-left { transform: translateX(-3px); }
+}
